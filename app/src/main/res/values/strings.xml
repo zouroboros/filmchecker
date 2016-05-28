@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FilmChecker</string>
+    <string name="title_activity_add_film">Neuen Film hinzufügen</string>
+    <string name="update_film_list">Filmliste aktualisieren</string>
+    <string name="add_film_order_number">Auftragsnummer</string>
+    <string name="add_film_shop_id">Filialnummer</string>
+    <string name="film_list_updateing_list">Aktualisiere Filmliste</string>
+</resources>
