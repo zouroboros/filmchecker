@@ -17,7 +17,7 @@ import me.murks.filmchecker.model.FilmStatus;
 /**
  * Class for querying the Rossmann Auftragstatus service
  */
-public class RossmanStatusProvider {
+public class RossmannStatusProvider {
 
     /**
      * The url to query for film infos
@@ -27,7 +27,7 @@ public class RossmanStatusProvider {
     /**
      * Creates a new RossmannStatusProvider
      */
-    public RossmanStatusProvider() {
+    public RossmannStatusProvider() {
         try {
             url = new URL("http://www.allcop.com/auftrags_auskunft/script.php");
         } catch (MalformedURLException e) {

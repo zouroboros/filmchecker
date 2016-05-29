@@ -8,7 +8,7 @@ import java.util.List;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.io.FilmDb;
-import me.murks.filmchecker.io.RossmanStatusProvider;
+import me.murks.filmchecker.io.RossmannStatusProvider;
 import me.murks.filmchecker.model.Film;
 
 /**
@@ -26,7 +26,7 @@ public class FilmCheckerApp {
      */
     public AsyncFilmListTask fillFilmList(Context context, FilmStatusListAdapter adapter) {
         FilmDb db = new FilmDb(context);
-        RossmanStatusProvider statusProvider = new RossmanStatusProvider();
+        RossmannStatusProvider statusProvider = new RossmannStatusProvider();
         Collection<Film> films = db.getFilms();
         AsyncFilmListTask loader = new AsyncFilmListTask(context, adapter, films);
         return loader;
