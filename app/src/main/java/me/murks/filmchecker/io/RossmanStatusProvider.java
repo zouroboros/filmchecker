@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,12 +15,18 @@ import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 
 /**
- * Created by mark on 28.05.16.
+ * Class for querying the Rossmann Auftragstatus service
  */
 public class RossmanStatusProvider {
 
+    /**
+     * The url to query for film infos
+     */
     private URL url;
 
+    /**
+     * Creates a new RossmannStatusProvider
+     */
     public RossmanStatusProvider() {
         try {
             url = new URL("http://www.allcop.com/auftrags_auskunft/script.php");
@@ -30,6 +35,12 @@ public class RossmanStatusProvider {
         }
     }
 
+    /**
+     * Queries the status of the given film
+     * @param film The film whose status wil be queried
+     * @return The status of the film order
+     * @throws IOException When an exception occurs while querying
+     */
     public FilmStatus getStatus(Film film) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         String urlParameter = "auftragsnr=" + film.getOrderNumber() + "&filialnr=" + film.getShopId();

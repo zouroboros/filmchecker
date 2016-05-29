@@ -12,7 +12,9 @@ import java.util.LinkedList;
 import me.murks.filmchecker.model.Film;
 
 /**
- * Created by mark on 28.05.16.
+ * Class for interacting with an SQLite Database for storing and retrieving {@see Film}s
+ * @author zouroboros
+ * @version 0.1 2016-05-29
  */
 public class FilmDb extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -23,6 +25,10 @@ public class FilmDb extends SQLiteOpenHelper {
     private static final String ORDER_NUMBER_COLUMN = "orderNumber";
     private static final String SHOP_ID_COLUMN = "shopId";
 
+    /**
+     * Constructs a FilmDb for the given {@see Context}
+     * @param context The current context
+     */
     public FilmDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -38,6 +44,10 @@ public class FilmDb extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
+    /**
+     * Adds a film to the database
+     * @param film The film to add
+     */
     public void addFilm(Film film) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -48,6 +58,10 @@ public class FilmDb extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Returns all films in the database
+     * @return All films as {@see Collection}
+     */
     public Collection<Film> getFilms() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(FILM_TABLE,
@@ -69,6 +83,10 @@ public class FilmDb extends SQLiteOpenHelper {
         return films;
     }
 
+    /**
+     * Deletes the given film
+     * @param film The film to remove from the database
+     */
     public void deleteFilm(Film film) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(FILM_TABLE, ORDER_NUMBER_COLUMN + " = ? and " + SHOP_ID_COLUMN + " = ?",

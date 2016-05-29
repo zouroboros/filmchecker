@@ -16,14 +16,16 @@ import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 
 /**
- * Created by mark on 28.05.16.
+ * Task for loading the status film orders
+ * @author Zouroboros
+ * @version 0.1 2016-05-29
  */
-public class AsyncListViewLoader extends AsyncTask<String, Void, List<Pair<Film, FilmStatus>>> {
+public class AsyncFilmListTask extends AsyncTask<String, Void, List<Pair<Film, FilmStatus>>> {
     private final ProgressDialog dialog;
     private final FilmStatusListAdapter adapter;
     private final Collection<Film> films;
 
-    public AsyncListViewLoader(Context context, FilmStatusListAdapter adapter, Collection<Film> films) {
+    public AsyncFilmListTask(Context context, FilmStatusListAdapter adapter, Collection<Film> films) {
         dialog = new ProgressDialog(context);
         this.adapter = adapter;
         this.films = films;
