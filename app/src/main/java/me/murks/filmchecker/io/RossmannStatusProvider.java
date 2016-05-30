@@ -45,7 +45,8 @@ public class RossmannStatusProvider {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         String urlParameter = "auftragsnr=" + film.getOrderNumber() + "&filialnr=" + film.getShopId();
         byte[] postData = urlParameter.getBytes();
-
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connection.setRequestProperty("Content-Length", Integer.toString(postData.length));
