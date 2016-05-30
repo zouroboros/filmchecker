@@ -6,7 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 
 import me.murks.filmchecker.model.Film;
@@ -17,13 +22,14 @@ import me.murks.filmchecker.model.Film;
  * @version 0.1 2016-05-29
  */
 public class FilmDb extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "FilmCheckerApp.db";
 
     private static final String FILM_TABLE = "films";
 
     private static final String ORDER_NUMBER_COLUMN = "orderNumber";
     private static final String SHOP_ID_COLUMN = "shopId";
+    private static final String INSERT_DATE_COLUMN = "insertDate";
 
     /**
      * Constructs a FilmDb for the given {@see Context}
@@ -36,12 +42,18 @@ public class FilmDb extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + FILM_TABLE + " (id integer primary key, "
-                + ORDER_NUMBER_COLUMN + " text,"
-                + SHOP_ID_COLUMN + " text)");
+                + ORDER_NUMBER_COLUMN + " text not null,"
+                + SHOP_ID_COLUMN + " text not null,"
+                + INSERT_DATE_COLUMN + " long not null)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(oldVersion < 2 && newVersion > 1) {
+            long currentTime = System.currentTimeMillis();
+            db.execSQL("alter table "+ FILM_TABLE +" add column " + INSERT_DATE_COLUMN
+                    + " long not null default "+ currentTime + "");
+        }
     }
 
     /**
@@ -53,7 +65,7 @@ public class FilmDb extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(ORDER_NUMBER_COLUMN, film.getOrderNumber());
         values.put(SHOP_ID_COLUMN, film.getShopId());
-
+        values.put(INSERT_DATE_COLUMN, film.getInsertDate().getTimeInMillis());
         db.insert(FILM_TABLE, null, values);
         db.close();
     }
@@ -65,20 +77,23 @@ public class FilmDb extends SQLiteOpenHelper {
     public Collection<Film> getFilms() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(FILM_TABLE,
-                new String[]{ORDER_NUMBER_COLUMN, SHOP_ID_COLUMN},
-                new String(),
+                new String[]{ORDER_NUMBER_COLUMN, SHOP_ID_COLUMN, INSERT_DATE_COLUMN},
+                "",
                 new String[0],
                 null,
                 null,
-                "id desc");
+                INSERT_DATE_COLUMN +" desc");
         cursor.moveToFirst();
         Collection<Film> films = new LinkedList<>();
         while(!cursor.isAfterLast()) {
             String orderNumber = cursor.getString(cursor.getColumnIndex(ORDER_NUMBER_COLUMN));
             String shopId = cursor.getString(cursor.getColumnIndex(SHOP_ID_COLUMN));
-            films.add(new Film(orderNumber, shopId));
+            Calendar insertDate = Calendar.getInstance();
+            insertDate.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(INSERT_DATE_COLUMN)));
+            films.add(new Film(orderNumber, shopId, insertDate));
             cursor.moveToNext();
         }
+        cursor.close();
         db.close();
         return films;
     }

@@ -1,6 +1,7 @@
 package me.murks.filmchecker.activities;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.LinkedList;
+import java.util.TimeZone;
 
 import me.murks.filmchecker.R;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 
 /**
- * Created by mark on 28.05.16.
+ * ListAdapter for the film list
+ * @author zouroboros
+ * @version 0.1 2016-05-30
  */
 public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> {
 
@@ -38,6 +42,14 @@ public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> 
 
         TextView statuscodeView = (TextView)view.findViewById(R.id.statusCode);
         statuscodeView.setText(entry.second.getStatus());
+
+        TextView insertDateView = (TextView)view.findViewById(R.id.insertDate);
+        long when = entry.first.getInsertDate().getTimeInMillis();
+        long time = when + TimeZone.getDefault().getOffset(when);
+        String formattedDate = DateUtils.formatDateTime(view.getContext(), time,
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+        insertDateView.setText(String.format(view.getResources()
+                .getString(R.string.film_list_insert_date), formattedDate));
         return view;
     }
 }

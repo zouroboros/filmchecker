@@ -7,8 +7,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
@@ -31,7 +35,10 @@ public class AddFilmActivity extends AppCompatActivity {
     public void addFilmClicked(View view) {
         String orderNumber = ((EditText) findViewById(R.id.orderNumber)).getText().toString();
         String shopId = ((EditText) findViewById(R.id.shopId)).getText().toString();
-        Film film = new Film(orderNumber, shopId);
+        DatePicker picker = ((DatePicker) findViewById(R.id.insertDatePicker));
+        Calendar date = Calendar.getInstance();
+        date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
+        Film film = new Film(orderNumber, shopId, date);
         app.addFilm(this, film);
         Intent intent = new Intent(this, FilmListActivity.class);
         startActivity(intent);
