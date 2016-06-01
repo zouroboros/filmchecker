@@ -2,6 +2,7 @@ package me.murks.filmchecker.activities;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> 
 
         TextView statuscodeView = (TextView)view.findViewById(R.id.statusCode);
         statuscodeView.setText(entry.second.getStatus());
+        statuscodeView.setSelected(true);
 
         TextView insertDateView = (TextView)view.findViewById(R.id.insertDate);
         long when = entry.first.getInsertDate().getTimeInMillis();

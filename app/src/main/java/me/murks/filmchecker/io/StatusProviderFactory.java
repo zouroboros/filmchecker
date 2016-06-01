@@ -8,7 +8,8 @@ import java.util.Collection;
  */
 public class StatusProviderFactory {
     public Collection<IStatusProvider> getFilmStatusProvider() {
-        return Arrays.<IStatusProvider>asList(new RossmannStatusProvider());
+        return Arrays.<IStatusProvider>asList(new RossmannStatusProvider(),
+                new DmStatusProvider());
     }
 
     public IStatusProvider getStatusProviderById(String id) {
@@ -17,6 +18,6 @@ public class StatusProviderFactory {
                 return provider;
             }
         }
-        throw new IllegalArgumentException("Not provider with id:"+id);
+        throw new IllegalArgumentException("No provider with id:" + id + " found.");
     }
 }
