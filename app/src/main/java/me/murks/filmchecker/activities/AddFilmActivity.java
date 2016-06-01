@@ -7,8 +7,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -16,6 +18,7 @@ import java.util.Date;
 
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
+import me.murks.filmchecker.io.IStatusProvider;
 import me.murks.filmchecker.model.Film;
 
 public class AddFilmActivity extends AppCompatActivity {
@@ -30,6 +33,9 @@ public class AddFilmActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         app = new FilmCheckerApp();
+
+        Spinner providerSpinner = (Spinner) findViewById(R.id.providerSpinner);
+        providerSpinner.setAdapter(new StatusProviderAdapter(this, app.getStatusProvider().getFilmStatusProvider()));
     }
 
     public void addFilmClicked(View view) {
@@ -38,7 +44,9 @@ public class AddFilmActivity extends AppCompatActivity {
         DatePicker picker = ((DatePicker) findViewById(R.id.insertDatePicker));
         Calendar date = Calendar.getInstance();
         date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
-        Film film = new Film(orderNumber, shopId, date);
+        Spinner providerSpinner = (Spinner) findViewById(R.id.providerSpinner);
+        IStatusProvider provider = (IStatusProvider) providerSpinner.getSelectedItem();
+        Film film = new Film(orderNumber, shopId, date, provider.getId());
         app.addFilm(this, film);
         Intent intent = new Intent(this, FilmListActivity.class);
         startActivity(intent);
