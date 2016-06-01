@@ -11,7 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
-import me.murks.filmchecker.io.RossmannStatusProvider;
+import me.murks.filmchecker.io.IStatusProvider;
+import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 
@@ -24,11 +25,15 @@ public class AsyncFilmListTask extends AsyncTask<String, Void, List<Pair<Film, F
     private final ProgressDialog dialog;
     private final FilmStatusListAdapter adapter;
     private final Collection<Film> films;
+    private final StatusProviderFactory statusProviderFactory;
 
-    public AsyncFilmListTask(Context context, FilmStatusListAdapter adapter, Collection<Film> films) {
+    public AsyncFilmListTask(Context context, FilmStatusListAdapter adapter,
+                             Collection<Film> films,
+                             StatusProviderFactory statusProvider) {
         dialog = new ProgressDialog(context);
         this.adapter = adapter;
         this.films = films;
+        this.statusProviderFactory = statusProvider;
     }
 
     @Override
@@ -48,11 +53,12 @@ public class AsyncFilmListTask extends AsyncTask<String, Void, List<Pair<Film, F
 
     @Override
     protected List<Pair<Film, FilmStatus>> doInBackground(String... params) {
-        RossmannStatusProvider statusProvider = new RossmannStatusProvider();
+        Collection<IStatusProvider> statusProvider = statusProviderFactory.getFilmStatusProvider();
         List<Pair<Film, FilmStatus>> results = new LinkedList<>();
         for (Film f: films) {
             try {
-                FilmStatus status = statusProvider.getStatus(f);
+                FilmStatus status = statusProviderFactory
+                        .getStatusProviderById(f.getStatusProvider()).getFilmStatus(f);
                 results.add(new Pair<>(f, status));
             } catch (IOException ioe) {
                 results.add(new Pair<>(f, new FilmStatus(ioe.getLocalizedMessage())));

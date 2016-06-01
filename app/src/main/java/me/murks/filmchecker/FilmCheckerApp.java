@@ -8,7 +8,7 @@ import java.util.List;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.io.FilmDb;
-import me.murks.filmchecker.io.RossmannStatusProvider;
+import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.Film;
 
 /**
@@ -26,9 +26,8 @@ public class FilmCheckerApp {
      */
     public AsyncFilmListTask fillFilmList(Context context, FilmStatusListAdapter adapter) {
         FilmDb db = new FilmDb(context);
-        RossmannStatusProvider statusProvider = new RossmannStatusProvider();
         Collection<Film> films = db.getFilms();
-        AsyncFilmListTask loader = new AsyncFilmListTask(context, adapter, films);
+        AsyncFilmListTask loader = new AsyncFilmListTask(context, adapter, films, getStatusProvider());
         return loader;
     }
 
@@ -60,5 +59,9 @@ public class FilmCheckerApp {
     public void removeFilm(Context context, Film film) {
         FilmDb db = new FilmDb(context);
         db.deleteFilm(film);
+    }
+
+    public StatusProviderFactory getStatusProvider() {
+        return new StatusProviderFactory();
     }
 }

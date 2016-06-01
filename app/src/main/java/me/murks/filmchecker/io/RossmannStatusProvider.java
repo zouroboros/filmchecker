@@ -17,7 +17,7 @@ import me.murks.filmchecker.model.FilmStatus;
 /**
  * Class for querying the Rossmann Auftragstatus service
  */
-public class RossmannStatusProvider {
+class RossmannStatusProvider implements IStatusProvider {
 
     /**
      * The url to query for film infos
@@ -35,13 +35,23 @@ public class RossmannStatusProvider {
         }
     }
 
+    @Override
+    public String getUiName() {
+        return "Rossmann";
+    }
+
+    @Override
+    public String getId() {
+        return this.getClass().getName();
+    }
+
     /**
      * Queries the status of the given film
      * @param film The film whose status wil be queried
      * @return The status of the film order
      * @throws IOException When an exception occurs while querying
      */
-    public FilmStatus getStatus(Film film) throws IOException {
+    public FilmStatus getFilmStatus(Film film) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         String urlParameter = "auftragsnr=" + film.getOrderNumber() + "&filialnr=" + film.getShopId();
         byte[] postData = urlParameter.getBytes();

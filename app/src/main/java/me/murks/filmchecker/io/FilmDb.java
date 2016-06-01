@@ -22,7 +22,7 @@ import me.murks.filmchecker.model.Film;
  * @version 0.1 2016-05-29
  */
 public class FilmDb extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "FilmCheckerApp.db";
 
     private static final String FILM_TABLE = "films";
@@ -30,6 +30,7 @@ public class FilmDb extends SQLiteOpenHelper {
     private static final String ORDER_NUMBER_COLUMN = "orderNumber";
     private static final String SHOP_ID_COLUMN = "shopId";
     private static final String INSERT_DATE_COLUMN = "insertDate";
+    private static final String PROVIDER_COLUMN = "provider";
 
     /**
      * Constructs a FilmDb for the given {@see Context}
@@ -44,7 +45,8 @@ public class FilmDb extends SQLiteOpenHelper {
         db.execSQL("create table " + FILM_TABLE + " (id integer primary key, "
                 + ORDER_NUMBER_COLUMN + " text not null,"
                 + SHOP_ID_COLUMN + " text not null,"
-                + INSERT_DATE_COLUMN + " long not null)");
+                + INSERT_DATE_COLUMN + " long not null,"
+                + PROVIDER_COLUMN + " text not null)");
     }
 
     @Override
@@ -53,6 +55,11 @@ public class FilmDb extends SQLiteOpenHelper {
             long currentTime = System.currentTimeMillis();
             db.execSQL("alter table "+ FILM_TABLE +" add column " + INSERT_DATE_COLUMN
                     + " long not null default "+ currentTime + "");
+        }
+
+        if(oldVersion < 3 && newVersion > 2) {
+            db.execSQL("alter table "+ FILM_TABLE +" add column " + PROVIDER_COLUMN
+                    + " text not null default 'me.murks.filmchecker.io.RossmannStatusProvider'");
         }
     }
 
@@ -66,6 +73,7 @@ public class FilmDb extends SQLiteOpenHelper {
         values.put(ORDER_NUMBER_COLUMN, film.getOrderNumber());
         values.put(SHOP_ID_COLUMN, film.getShopId());
         values.put(INSERT_DATE_COLUMN, film.getInsertDate().getTimeInMillis());
+        values.put(PROVIDER_COLUMN, film.getStatusProvider());
         db.insert(FILM_TABLE, null, values);
         db.close();
     }
@@ -77,7 +85,7 @@ public class FilmDb extends SQLiteOpenHelper {
     public Collection<Film> getFilms() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(FILM_TABLE,
-                new String[]{ORDER_NUMBER_COLUMN, SHOP_ID_COLUMN, INSERT_DATE_COLUMN},
+                new String[]{ORDER_NUMBER_COLUMN, SHOP_ID_COLUMN, INSERT_DATE_COLUMN, PROVIDER_COLUMN},
                 "",
                 new String[0],
                 null,
@@ -90,7 +98,8 @@ public class FilmDb extends SQLiteOpenHelper {
             String shopId = cursor.getString(cursor.getColumnIndex(SHOP_ID_COLUMN));
             Calendar insertDate = Calendar.getInstance();
             insertDate.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(INSERT_DATE_COLUMN)));
-            films.add(new Film(orderNumber, shopId, insertDate));
+            String provider = cursor.getString(cursor.getColumnIndex(PROVIDER_COLUMN));
+            films.add(new Film(orderNumber, shopId, insertDate, provider));
             cursor.moveToNext();
         }
         cursor.close();
