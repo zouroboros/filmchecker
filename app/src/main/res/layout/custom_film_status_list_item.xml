@@ -12,13 +12,40 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:longClickable="true"
+        android:id="@+id/statusCode"
+        android:text="statusCode"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:layout_below="@+id/insertDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:longClickable="true"
         android:id="@+id/orderNumber"
         android:text="orderNumber"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="(01.01.16)"
+        android:id="@+id/insertDate"
+        android:layout_alignBottom="@+id/orderNumber"
+        android:layout_alignRight="@+id/statusCode"
+        android:layout_alignEnd="@+id/statusCode" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,30 +54,9 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
         android:longClickable="true"
         android:id="@+id/shopId"
         android:text="shopId"
-        android:layout_below="@+id/orderNumber"
-        android:layout_alignRight="@+id/orderNumber"
-        android:layout_alignEnd="@+id/orderNumber" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:longClickable="true"
-        android:id="@+id/statusCode"
-        android:text="statusCode"
         android:layout_alignBottom="@+id/orderNumber"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="(01.01.16)"
-        android:id="@+id/insertDate"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/orderNumber"
         android:layout_toRightOf="@+id/orderNumber"
-        android:layout_marginLeft="@dimen/insertDateLeftMargin"
-        android:layout_marginStart="@dimen/insertDateLeftMargin"/>
+        android:layout_toEndOf="@+id/orderNumber"
+        android:layout_marginLeft="@dimen/insertDateLeftMargin"/>
+
 </RelativeLayout>
