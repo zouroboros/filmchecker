@@ -6,12 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.LinkedList;
 
 import me.murks.filmchecker.model.Film;
@@ -22,8 +18,8 @@ import me.murks.filmchecker.model.Film;
  * @version 0.1 2016-05-29
  */
 public class FilmDb extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 3;
-    public static final String DATABASE_NAME = "FilmCheckerApp.db";
+    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME = "FilmCheckerApp.db";
 
     private static final String FILM_TABLE = "films";
 

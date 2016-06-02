@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.murks.filmchecker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/film_checker_logo"
@@ -22,8 +24,7 @@
         <activity
             android:name=".activities.AddFilmActivity"
             android:label="@string/title_activity_add_film"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

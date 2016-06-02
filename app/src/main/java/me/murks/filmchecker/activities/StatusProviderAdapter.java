@@ -12,10 +12,17 @@ import java.util.Collection;
 import me.murks.filmchecker.io.IStatusProvider;
 
 /**
- * Created by mark on 01.06.16.
+ * Adapter implementation for selecting {@see IStatusProvider}
+ * @author zouroboros
+ * @version 2016-02-06 0.1
  */
-public class StatusProviderAdapter extends ArrayAdapter<IStatusProvider> {
+class StatusProviderAdapter extends ArrayAdapter<IStatusProvider> {
 
+    /**
+     * Creates a new StatusProviderAdapter
+     * @param context The current context
+     * @param provider Collection of IStatusProvider
+     */
     public StatusProviderAdapter(Context context, Collection<IStatusProvider> provider) {
         super(context, 0, provider.toArray(new IStatusProvider[0]));
     }

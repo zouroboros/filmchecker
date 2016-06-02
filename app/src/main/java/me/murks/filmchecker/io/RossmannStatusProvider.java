@@ -64,7 +64,7 @@ class RossmannStatusProvider implements IStatusProvider {
         stream.write(postData);
         String response = CharStreams.toString( new InputStreamReader( connection.getInputStream(), "UTF-8" ) );
         connection.disconnect();
-        Pattern matchPattern = Pattern.compile("(?:Status\\:<\\/th><td>)([a-z A-Z 1-9]*)(?:<\\/td>)");
+        Pattern matchPattern = Pattern.compile("(?:Status\\:</th><td>)([a-z A-Z 1-9]*)(?:</td>)");
         Matcher match = matchPattern.matcher(response);
         if(match.find()) {
             String status = match.group(1);
