@@ -2,7 +2,6 @@ package me.murks.filmchecker.activities;
 
 import android.content.Context;
 import android.text.format.DateUtils;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;

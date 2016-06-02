@@ -1,7 +1,6 @@
 package me.murks.filmchecker.model;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Model for a film order

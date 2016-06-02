@@ -27,8 +27,7 @@ public class FilmCheckerApp {
     public AsyncFilmListTask fillFilmList(Context context, FilmStatusListAdapter adapter) {
         FilmDb db = new FilmDb(context);
         Collection<Film> films = db.getFilms();
-        AsyncFilmListTask loader = new AsyncFilmListTask(context, adapter, films, getStatusProvider());
-        return loader;
+        return new AsyncFilmListTask(context, adapter, films, getStatusProvider());
     }
 
     /**

@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
-import me.murks.filmchecker.io.IStatusProvider;
 import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
@@ -53,7 +52,6 @@ public class AsyncFilmListTask extends AsyncTask<String, Void, List<Pair<Film, F
 
     @Override
     protected List<Pair<Film, FilmStatus>> doInBackground(String... params) {
-        Collection<IStatusProvider> statusProvider = statusProviderFactory.getFilmStatusProvider();
         List<Pair<Film, FilmStatus>> results = new LinkedList<>();
         for (Film f: films) {
             try {
