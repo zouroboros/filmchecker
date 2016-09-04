@@ -16,6 +16,9 @@ import me.murks.filmchecker.R;
 import me.murks.filmchecker.io.IStatusProvider;
 import me.murks.filmchecker.model.Film;
 
+/**
+ * Activity to add a new film order
+ */
 public class AddFilmActivity extends AppCompatActivity {
 
     private FilmCheckerApp app;

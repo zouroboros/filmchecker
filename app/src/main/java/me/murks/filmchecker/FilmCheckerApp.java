@@ -51,7 +51,7 @@ public class FilmCheckerApp {
     }
 
     /**
-     * Rermanently removes a {@see Film}
+     * Permanently removes a {@see Film}
      * @param context Current context
      * @param film The {@see Film} to remove
      */
