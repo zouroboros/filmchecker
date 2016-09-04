@@ -13,6 +13,9 @@ import android.widget.ListView;
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
 
+/**
+ * Activity for listing all films
+ */
 public class FilmListActivity extends AppCompatActivity implements AdapterView.OnItemLongClickListener {
 
     private FilmCheckerApp app;
