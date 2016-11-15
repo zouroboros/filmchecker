@@ -29,7 +29,7 @@ class RossmannStatusProvider implements IStatusProvider {
      */
     public RossmannStatusProvider() {
         try {
-            url = new URL("http://www.allcop.com/auftrags_auskunft/script.php");
+            url = new URL("http://tracking.orwonet.de/tracking/orderdetails.jsp");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -53,7 +53,7 @@ class RossmannStatusProvider implements IStatusProvider {
      */
     public FilmStatus getFilmStatus(Film film) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        String urlParameter = "auftragsnr=" + film.getOrderNumber() + "&filialnr=" + film.getShopId();
+        String urlParameter = "bagId=" + film.getOrderNumber() + "&outletId=" + film.getShopId();
         byte[] postData = urlParameter.getBytes();
         connection.setDoOutput(true);
         connection.setDoInput(true);
@@ -64,7 +64,7 @@ class RossmannStatusProvider implements IStatusProvider {
         stream.write(postData);
         String response = CharStreams.toString( new InputStreamReader( connection.getInputStream(), "UTF-8" ) );
         connection.disconnect();
-        Pattern matchPattern = Pattern.compile("(?:Status\\:</th><td>)([a-z A-Z 1-9]*)(?:</td>)");
+        Pattern matchPattern = Pattern.compile("(?:<td class=\"boxHalf\">Auftragsstatus:</td>\\s*<td class=\"boxHalf\">)([\\w \\s \\/ \\.]*)(?:</td>)");
         Matcher match = matchPattern.matcher(response);
         if(match.find()) {
             String status = match.group(1);
