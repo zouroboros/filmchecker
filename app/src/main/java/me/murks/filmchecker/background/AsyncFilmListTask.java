@@ -1,4 +1,4 @@
-package me.murks.filmchecker;
+package me.murks.filmchecker.background;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,13 +10,14 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import me.murks.filmchecker.R;
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 
 /**
- * Task for loading the status film orders
+ * Task for loading the status of film orders
  * @author Zouroboros
  * @version 0.1 2016-05-29
  */

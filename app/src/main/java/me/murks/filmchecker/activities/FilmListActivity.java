@@ -45,7 +45,7 @@ public class FilmListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void addFilmClicked(View view) {
-        Intent intent = new Intent(this, AddFilmActivity.class);
+        Intent intent = new Intent(this, AddFilmWizardActivity.class);
         startActivity(intent);
     }
 

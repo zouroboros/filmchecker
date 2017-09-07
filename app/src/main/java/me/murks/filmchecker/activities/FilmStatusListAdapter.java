@@ -1,6 +1,7 @@
 package me.murks.filmchecker.activities;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -28,7 +29,8 @@ public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> 
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         Pair<Film, FilmStatus> entry = super.getItem(position);
         View view = convertView;
         if(view == null) {

@@ -53,6 +53,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
         android:layout_alignBottom="@+id/orderNumber"
         android:layout_toRightOf="@+id/orderNumber"
         android:layout_toEndOf="@+id/orderNumber"
-        android:layout_marginLeft="@dimen/insertDateLeftMargin"/>
+        android:layout_marginLeft="@dimen/insertDateLeftMargin"
+        android:layout_marginStart="@dimen/insertDateLeftMargin"/>
 
 </RelativeLayout>
