@@ -31,7 +31,7 @@ class DmStatusProvider implements IStatusProvider {
      * Creates a new DmStatusProvider
      */
     public DmStatusProvider() {
-        url = "http://spot.photoprintit.com/spotapi/orderInfo/forShop";
+        url = "https://spot.photoprintit.com/spotapi/orderInfo/forShop";
     }
 
     @Override
