@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
+import me.murks.filmchecker.background.AsyncFilmListTask;
 import me.murks.filmchecker.io.FilmDb;
 import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.Film;

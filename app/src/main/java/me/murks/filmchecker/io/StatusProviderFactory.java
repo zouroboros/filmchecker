@@ -6,7 +6,7 @@ import java.util.Collection;
 /**
  * Class for getting {@see IStatusProvider} implementations
  * @author zouroboros
- * @version 2016-06-02 0.1
+ * @version 15/9/17 0.2
  */
 public class StatusProviderFactory {
 
@@ -31,5 +31,13 @@ public class StatusProviderFactory {
             }
         }
         throw new IllegalArgumentException("No provider with id:" + id + " found.");
+    }
+
+    public IStatusProvider getDmStatusProvider() {
+        return new DmStatusProvider();
+    }
+
+    public IStatusProvider getRmStatusProvider() {
+        return new RossmannStatusProvider();
     }
 }

@@ -1,6 +1,7 @@
 package me.murks.filmchecker.activities;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,8 @@ class StatusProviderAdapter extends ArrayAdapter<IStatusProvider> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         IStatusProvider provider = super.getItem(position);
         TextView view = (TextView) convertView;
         if (view == null) {
@@ -39,7 +41,8 @@ class StatusProviderAdapter extends ArrayAdapter<IStatusProvider> {
     }
 
     @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
         IStatusProvider provider = super.getItem(position);
         TextView view = (TextView) convertView;
         if (view == null) {

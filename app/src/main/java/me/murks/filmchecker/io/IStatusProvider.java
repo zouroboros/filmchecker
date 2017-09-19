@@ -17,7 +17,7 @@ public interface IStatusProvider {
 
     /**
      * The id of this status provider
-     * @return
+     * @return The Id of the status provider
      */
     String getId();
 

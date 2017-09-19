@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -18,7 +20,7 @@ import me.murks.filmchecker.model.Film;
  * @version 0.1 2016-05-29
  */
 public class FilmDb extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "FilmCheckerApp.db";
 
     private static final String FILM_TABLE = "films";
@@ -27,6 +29,9 @@ public class FilmDb extends SQLiteOpenHelper {
     private static final String SHOP_ID_COLUMN = "shopId";
     private static final String INSERT_DATE_COLUMN = "insertDate";
     private static final String PROVIDER_COLUMN = "provider";
+    private static final String RM_ENDPOINT_COLUMN = "rmEndpoint";
+    private static final String HT_NUMBER_COLUMN = "htNumber";
+    private static final String ID_COLUMN = "id";
 
     /**
      * Constructs a FilmDb for the given {@see Context}
@@ -40,9 +45,12 @@ public class FilmDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + FILM_TABLE + " (id integer primary key, "
                 + ORDER_NUMBER_COLUMN + " text not null,"
-                + SHOP_ID_COLUMN + " text not null,"
+                + SHOP_ID_COLUMN + " text null,"
                 + INSERT_DATE_COLUMN + " long not null,"
-                + PROVIDER_COLUMN + " text not null)");
+                + PROVIDER_COLUMN + " text not null,"
+                + RM_ENDPOINT_COLUMN + " text,"
+                + HT_NUMBER_COLUMN + " text)"
+                );
     }
 
     @Override
@@ -57,6 +65,30 @@ public class FilmDb extends SQLiteOpenHelper {
             db.execSQL("alter table "+ FILM_TABLE +" add column " + PROVIDER_COLUMN
                     + " text not null default 'me.murks.filmchecker.io.RossmannStatusProvider'");
         }
+
+        if(oldVersion < 4 && newVersion > 3) {
+            db.beginTransaction();
+            db.execSQL("alter table " + FILM_TABLE + " add column " + RM_ENDPOINT_COLUMN + " text;" +
+                    "alter table " + FILM_TABLE + " add column " + HT_NUMBER_COLUMN + " text;" +
+                    "alter table " + FILM_TABLE + " rename to " + FILM_TABLE + "old;" +
+                    "create table " + FILM_TABLE + " (id integer primary key, "
+                        + ORDER_NUMBER_COLUMN + " text not null,"
+                        + SHOP_ID_COLUMN + " text null,"
+                        + INSERT_DATE_COLUMN + " long not null,"
+                        + PROVIDER_COLUMN + " text not null,"
+                        + RM_ENDPOINT_COLUMN + " text,"
+                        + HT_NUMBER_COLUMN + " text);"
+                    + "insert into " + FILM_TABLE + "select "
+                        + ORDER_NUMBER_COLUMN + " "
+                        + SHOP_ID_COLUMN + " "
+                        + INSERT_DATE_COLUMN + " "
+                        + PROVIDER_COLUMN + " "
+                        + RM_ENDPOINT_COLUMN + " "
+                        + HT_NUMBER_COLUMN + " from " + FILM_TABLE + "old;"
+                    + " drop table " + FILM_TABLE + "old");
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        }
     }
 
     /**
@@ -70,6 +102,8 @@ public class FilmDb extends SQLiteOpenHelper {
         values.put(SHOP_ID_COLUMN, film.getShopId());
         values.put(INSERT_DATE_COLUMN, film.getInsertDate().getTimeInMillis());
         values.put(PROVIDER_COLUMN, film.getStatusProvider());
+        values.put(RM_ENDPOINT_COLUMN, film.getRmEndpoint().toString());
+        values.put(HT_NUMBER_COLUMN, film.getHtnumber());
         db.insert(FILM_TABLE, null, values);
         db.close();
     }
@@ -81,7 +115,8 @@ public class FilmDb extends SQLiteOpenHelper {
     public Collection<Film> getFilms() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(FILM_TABLE,
-                new String[]{ORDER_NUMBER_COLUMN, SHOP_ID_COLUMN, INSERT_DATE_COLUMN, PROVIDER_COLUMN},
+                new String[]{ID_COLUMN, ORDER_NUMBER_COLUMN, SHOP_ID_COLUMN, INSERT_DATE_COLUMN, PROVIDER_COLUMN,
+                        RM_ENDPOINT_COLUMN, HT_NUMBER_COLUMN},
                 "",
                 new String[0],
                 null,
@@ -90,12 +125,19 @@ public class FilmDb extends SQLiteOpenHelper {
         cursor.moveToFirst();
         Collection<Film> films = new LinkedList<>();
         while(!cursor.isAfterLast()) {
+            Long id = cursor.getLong(cursor.getColumnIndex(ID_COLUMN));
             String orderNumber = cursor.getString(cursor.getColumnIndex(ORDER_NUMBER_COLUMN));
             String shopId = cursor.getString(cursor.getColumnIndex(SHOP_ID_COLUMN));
             Calendar insertDate = Calendar.getInstance();
             insertDate.setTimeInMillis(cursor.getLong(cursor.getColumnIndex(INSERT_DATE_COLUMN)));
             String provider = cursor.getString(cursor.getColumnIndex(PROVIDER_COLUMN));
-            films.add(new Film(orderNumber, shopId, insertDate, provider));
+            String rmEndpoint = cursor.getString(cursor.getColumnIndex(RM_ENDPOINT_COLUMN));
+            String htNumber = cursor.getString(cursor.getColumnIndex(HT_NUMBER_COLUMN));
+            try {
+                films.add(new Film(id, orderNumber, shopId, insertDate, provider, new URL(rmEndpoint), htNumber));
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
             cursor.moveToNext();
         }
         cursor.close();
@@ -109,8 +151,8 @@ public class FilmDb extends SQLiteOpenHelper {
      */
     public void deleteFilm(Film film) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(FILM_TABLE, ORDER_NUMBER_COLUMN + " = ? and " + SHOP_ID_COLUMN + " = ?",
-                new String[]{film.getOrderNumber(), film.getShopId()});
+        db.delete(FILM_TABLE, ID_COLUMN + " = ?",
+                new String[]{film.getId().toString()});
         db.close();
     }
 }
