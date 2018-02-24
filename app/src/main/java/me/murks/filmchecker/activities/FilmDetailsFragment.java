@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.net.URL;
 import java.util.Calendar;
 
 import me.murks.filmchecker.R;
@@ -53,10 +54,12 @@ public class FilmDetailsFragment extends Fragment {
                 Calendar date = Calendar.getInstance();
                 date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
                 IStatusProvider provider = parent.getApp().getStatusProvider().getDmStatusProvider();
+                URL endpoint = null;
                 if(parent.getRmQueryModel() != null) {
                     provider = parent.getApp().getStatusProvider().getRmStatusProvider();
+                    endpoint = parent.getRmQueryModel().queryEndpoint;
                 }
-                Film film = new Film(orderNumber, shopId, date, provider.getId(), parent.getRmQueryModel().queryEndpoint, htNumber);
+                Film film = new Film(orderNumber, shopId, date, provider.getId(), endpoint, htNumber);
                 parent.getApp().addFilm(view.getContext(), film);
                 Intent intent = new Intent(view.getContext(), FilmListActivity.class);
                 startActivity(intent);

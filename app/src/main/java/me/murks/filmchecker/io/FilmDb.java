@@ -102,7 +102,7 @@ public class FilmDb extends SQLiteOpenHelper {
         values.put(SHOP_ID_COLUMN, film.getShopId());
         values.put(INSERT_DATE_COLUMN, film.getInsertDate().getTimeInMillis());
         values.put(PROVIDER_COLUMN, film.getStatusProvider());
-        values.put(RM_ENDPOINT_COLUMN, film.getRmEndpoint().toString());
+        values.put(RM_ENDPOINT_COLUMN, film.getRmEndpoint() != null ? film.getRmEndpoint().toString() : null);
         values.put(HT_NUMBER_COLUMN, film.getHtnumber());
         db.insert(FILM_TABLE, null, values);
         db.close();
@@ -134,7 +134,11 @@ public class FilmDb extends SQLiteOpenHelper {
             String rmEndpoint = cursor.getString(cursor.getColumnIndex(RM_ENDPOINT_COLUMN));
             String htNumber = cursor.getString(cursor.getColumnIndex(HT_NUMBER_COLUMN));
             try {
-                films.add(new Film(id, orderNumber, shopId, insertDate, provider, new URL(rmEndpoint), htNumber));
+                URL endpoint = null;
+                if(rmEndpoint != null) {
+                    endpoint = new URL(rmEndpoint);
+                }
+                films.add(new Film(id, orderNumber, shopId, insertDate, provider, endpoint, htNumber));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
