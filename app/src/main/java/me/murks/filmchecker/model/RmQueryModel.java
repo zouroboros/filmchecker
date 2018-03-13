@@ -8,6 +8,9 @@ import java.net.URL;
  */
 
 public class RmQueryModel {
+    /**
+     *
+     */
     public final Boolean htNumber;
     public final URL queryEndpoint;
 
