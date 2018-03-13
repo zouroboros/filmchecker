@@ -17,6 +17,7 @@ import java.util.Calendar;
 import me.murks.filmchecker.R;
 import me.murks.filmchecker.io.IStatusProvider;
 import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.RmQueryModel;
 
 /**
  * Fragment for entering the details of a film order
@@ -26,6 +27,7 @@ import me.murks.filmchecker.model.Film;
 public class FilmDetailsFragment extends Fragment {
 
     private AddFilmWizardActivity parent;
+    private RmQueryModel rmQueryModel;
 
     public FilmDetailsFragment() {
     }
@@ -34,11 +36,6 @@ public class FilmDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.film_details_fragment, container, false);
-        if(parent.getRmQueryModel() != null && parent.getRmQueryModel().htNumber) {
-            rootView.findViewById(R.id.htnText).setEnabled(false);
-        } else {
-            rootView.findViewById(R.id.shopId).setEnabled(false);
-        }
 
         Button saveButton = (Button) rootView.findViewById(R.id.saveFilmButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -73,5 +70,24 @@ public class FilmDetailsFragment extends Fragment {
     public void onAttach(Context activity) {
         super.onAttach(activity);
         parent = (AddFilmWizardActivity) activity;
+    }
+
+    public void setRmQueryModel(RmQueryModel model) {
+        rmQueryModel = model;
+
+        parent.findViewById(R.id.htnText).setEnabled(true);
+        parent.findViewById(R.id.shopId).setEnabled(true);
+
+        // determine which fields are required and which are not
+        if(rmQueryModel != null && rmQueryModel.htNumber) {
+            // rossmann with ht-number
+            parent.findViewById(R.id.shopId).setEnabled(false);
+        } else if(rmQueryModel != null){
+            // rossmann with filialnummer
+            parent.findViewById(R.id.htnText).setEnabled(false);
+        } else if(rmQueryModel == null) {
+            // dm
+            parent.findViewById(R.id.htnText).setEnabled(false);
+        }
     }
 }

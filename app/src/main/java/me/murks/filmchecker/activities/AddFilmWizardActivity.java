@@ -27,6 +27,7 @@ public class AddFilmWizardActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private RmQueryModel rmQueryModel;
+    private FilmDetailsFragment filmDetailsFragment;
     private FilmCheckerApp app;
 
     /**
@@ -80,13 +81,19 @@ public class AddFilmWizardActivity extends AppCompatActivity {
 
     public void jumpToDm() {
         mViewPager.setCurrentItem(2);
+        filmDetailsFragment.setRmQueryModel(null);
     }
 
     public void jumpToLastStep(RmQueryModel rmQueryModel) {
         this.rmQueryModel = rmQueryModel;
+        filmDetailsFragment.setRmQueryModel(rmQueryModel);
         mViewPager.setCurrentItem(2);
     }
 
+    /**
+     * If the new film to be added is a rossmann film this returns the query model for rossmann films
+     * @return
+     */
     public RmQueryModel getRmQueryModel() {
         return rmQueryModel;
     }
@@ -112,7 +119,10 @@ public class AddFilmWizardActivity extends AppCompatActivity {
             } else if(position == 1) {
                 return RossmannChooseStoreFragment.newInstance(position);
             } else if(position == 2) {
-                return new FilmDetailsFragment();
+                if(filmDetailsFragment == null) {
+                    filmDetailsFragment = new FilmDetailsFragment();
+                }
+                return filmDetailsFragment;
             }
             throw new IllegalArgumentException("invalid position");
         }
