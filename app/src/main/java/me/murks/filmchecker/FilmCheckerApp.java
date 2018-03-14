@@ -3,14 +3,19 @@ package me.murks.filmchecker;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.background.AsyncFilmListTask;
 import me.murks.filmchecker.io.FilmDb;
 import me.murks.filmchecker.io.StatusProviderFactory;
+import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.RmStoreModel;
+import me.murks.filmchecker.model.StoreModel;
 
 /**
  * Class for representing the FilmChecker app. Provides means
@@ -63,5 +68,13 @@ public class FilmCheckerApp {
 
     public StatusProviderFactory getStatusProvider() {
         return new StatusProviderFactory();
+    }
+
+    /**
+     * Returns the list of supported stores
+     * @return List of supported stores
+     */
+    public List<StoreModel> getStores() {
+        return Arrays.asList(new DmDeStoreModel(this), new RmStoreModel(this));
     }
 }

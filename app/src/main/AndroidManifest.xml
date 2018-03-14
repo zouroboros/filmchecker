@@ -24,8 +24,7 @@
         </activity>
         <activity
             android:name=".activities.AddFilmWizardActivity"
-            android:label="@string/title_activity_add_film_wizard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_add_film_wizard" />
     </application>
 
 </manifest>
