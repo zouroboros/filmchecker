@@ -17,13 +17,15 @@ public class DmDeStoreModel implements StoreModel {
 
     private final FilmCheckerApp app;
 
+    public static String StoreId = "me.murks.filmchecker.io.DmStatusProvider";
+
     public DmDeStoreModel(FilmCheckerApp app) {
         this.app = app;
     }
 
     @Override
     public Film getFilm(String shopId, String htNumber, String orderNumber, Calendar date) {
-        return new Film(orderNumber, shopId, date, app.getStatusProvider().getDmStatusProvider().getId(), null, null);
+        return new Film(orderNumber, shopId, date, StoreId, null, null);
     }
 
     @Override

@@ -15,6 +15,8 @@ import me.murks.filmchecker.R;
 
 public class RmStoreModel implements StoreModel {
 
+    public final static String StoreId = "me.murks.filmchecker.io.RossmannStatusProvider";
+
     private final FilmCheckerApp app;
     private RmQueryModel rmQueryModel;
 
@@ -25,7 +27,7 @@ public class RmStoreModel implements StoreModel {
     @Override
     public Film getFilm(String shopId, String htNumber, String orderNumber, Calendar date) {
         return new Film(orderNumber, shopId, date,
-                app.getStatusProvider().getRmStatusProvider().getId(),
+                StoreId,
                 rmQueryModel.queryEndpoint, htNumber);
     }
 

@@ -5,13 +5,9 @@ package me.murks.filmchecker.io;
  * @author zouroboros
  * @date 3/17/18.
  */
-public class DmAtStatusProvider extends DmStatusProvider {
+class DmAtStatusProvider extends DmStatusProvider {
+
     public DmAtStatusProvider() {
         super("2976");
-    }
-
-    @Override
-    public String getId() {
-        return "dm.at";
     }
 }

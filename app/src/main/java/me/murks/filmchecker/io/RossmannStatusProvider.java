@@ -24,11 +24,6 @@ class RossmannStatusProvider implements IStatusProvider {
         return "Rossmann";
     }
 
-    @Override
-    public String getId() {
-        return this.getClass().getName();
-    }
-
     /**
      * Queries the status of the given film
      * @param film The film whose status wil be queried

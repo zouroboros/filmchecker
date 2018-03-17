@@ -17,7 +17,6 @@ import me.murks.filmchecker.model.FilmStatus;
  * {@see IStatusProvider} implementation for dm
  */
 class DmStatusProvider implements IStatusProvider {
-
     /**
      * The url to query for film info
      */
@@ -52,11 +51,6 @@ class DmStatusProvider implements IStatusProvider {
     @Override
     public String getUiName() {
         return "dm";
-    }
-
-    @Override
-    public String getId() {
-        return this.getClass().getName();
     }
 
     @Override

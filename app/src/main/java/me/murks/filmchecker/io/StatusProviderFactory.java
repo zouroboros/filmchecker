@@ -2,6 +2,11 @@ package me.murks.filmchecker.io;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
+
+import me.murks.filmchecker.model.DmDeStoreModel;
+import me.murks.filmchecker.model.RmStoreModel;
 
 /**
  * Class for getting {@see IStatusProvider} implementations
@@ -10,28 +15,29 @@ import java.util.Collection;
  */
 public class StatusProviderFactory {
 
+    private final Map<String, IStatusProvider> statusProvider;
+
+    public StatusProviderFactory() {
+        statusProvider = new TreeMap<>();
+        statusProvider.put(DmDeStoreModel.StoreId, new DmStatusProvider());
+        statusProvider.put(RmStoreModel.StoreId, new RossmannStatusProvider());
+    }
+
     /**
      * Returns all available {@see IStatusProvider} implementations
      * @return Collection of IStatusProvider
      */
     public Collection<IStatusProvider> getFilmStatusProvider() {
-        return Arrays.asList(new RossmannStatusProvider(),
-                new DmStatusProvider(),
-                new DmAtStatusProvider());
+        return statusProvider.values();
     }
 
     /**
-     * Get's an {@see IStatusProvider} implementation bs his id
+     * Get's an {@see IStatusProvider} implementation by his id
      * @param id The id of the status provider
      * @return A IStatusProvider instance
      */
     public IStatusProvider getStatusProviderById(String id) {
-        for(IStatusProvider provider : this.getFilmStatusProvider()) {
-            if(provider.getId().equals(id)) {
-                return provider;
-            }
-        }
-        throw new IllegalArgumentException("No provider with id:" + id + " found.");
+        return statusProvider.get(id);
     }
 
     public IStatusProvider getDmStatusProvider() {
