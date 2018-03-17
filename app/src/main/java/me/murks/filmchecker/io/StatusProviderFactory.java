@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
+import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.RmStoreModel;
 
@@ -21,6 +22,7 @@ public class StatusProviderFactory {
         statusProvider = new TreeMap<>();
         statusProvider.put(DmDeStoreModel.StoreId, new DmStatusProvider());
         statusProvider.put(RmStoreModel.StoreId, new RossmannStatusProvider());
+        statusProvider.put(DmAtStoreModel.StoreId, new DmAtStatusProvider());
     }
 
     /**

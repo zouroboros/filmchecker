@@ -12,6 +12,7 @@ import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.background.AsyncFilmListTask;
 import me.murks.filmchecker.io.FilmDb;
 import me.murks.filmchecker.io.StatusProviderFactory;
+import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.RmStoreModel;
@@ -75,6 +76,6 @@ public class FilmCheckerApp {
      * @return List of supported stores
      */
     public List<StoreModel> getStores() {
-        return Arrays.asList(new DmDeStoreModel(this), new RmStoreModel(this));
+        return Arrays.asList(new DmDeStoreModel(this), new DmAtStoreModel(this), new RmStoreModel(this));
     }
 }
