@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="@string/update_film_list"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="100"
+        android:title="@string/helpMenu"
+        app:showAsAction="never" />
 </menu>

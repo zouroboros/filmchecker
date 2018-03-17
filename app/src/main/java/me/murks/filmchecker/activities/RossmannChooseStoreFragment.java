@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import me.murks.filmchecker.R;
 import me.murks.filmchecker.background.RmStoreQueryTask;
+import me.murks.filmchecker.model.RmStoreModel;
 import me.murks.filmchecker.model.RossmannStoreLink;
 
 /**
@@ -25,12 +26,8 @@ public class RossmannChooseStoreFragment extends Fragment {
      * The fragment argument representing the section number for this
      * fragment.
      */
-    private static final String ARG_SECTION_NUMBER = "filmdetails";
+    private static final String ARG_SECTION_NUMBER = "rm-store-locator";
     private AddFilmWizardActivity parent;
-
-
-    public RossmannChooseStoreFragment() {
-    }
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -60,16 +57,15 @@ public class RossmannChooseStoreFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 RossmannStoreLink link = (RossmannStoreLink) adapterView.getAdapter().getItem(i);
-                new RmStoreQueryTask(parent).execute(link.storeUrl);
+                new RmStoreQueryTask(parent, (RmStoreModel) parent.getStoreModel()).execute(link.storeUrl);
             }
         });
 
-        final ArrayAdapter<RossmannStoreLink> storeAdapter = new ArrayAdapter<>(getContext(), R.layout.store_list_item, R.id.store_list_item_text);
+        final ArrayAdapter<RossmannStoreLink> storeAdapter = new ArrayAdapter<>(getContext(), R.layout.rm_store_list_item, R.id.rm_store_list_item_text);
         storeList.setAdapter(storeAdapter);
 
         plzInput.addTextChangedListener(new RmStoreListTextWatcher(storeAdapter));
 
         return rootView;
     }
-
 }

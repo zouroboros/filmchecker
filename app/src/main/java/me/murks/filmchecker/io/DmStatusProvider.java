@@ -17,7 +17,6 @@ import me.murks.filmchecker.model.FilmStatus;
  * {@see IStatusProvider} implementation for dm
  */
 class DmStatusProvider implements IStatusProvider {
-
     /**
      * The url to query for film info
      */
@@ -28,10 +27,25 @@ class DmStatusProvider implements IStatusProvider {
     private static final String SUMMARY_KEY = "summaryStateText";
 
     /**
+     * Value for config parameter used for requesting the film details
+     */
+    private final String config;
+
+    /**
      * Creates a new DmStatusProvider
      */
     public DmStatusProvider() {
         url = "https://spot.photoprintit.com/spotapi/orderInfo/forShop";
+        config = "1320";
+    }
+
+    /**
+     * Creates a new DmStatusProvider using the given config value
+     * @param config The value for the config parameter
+     */
+    public DmStatusProvider(String config) {
+        url = "https://spot.photoprintit.com/spotapi/orderInfo/forShop";
+        this.config = config;
     }
 
     @Override
@@ -40,13 +54,8 @@ class DmStatusProvider implements IStatusProvider {
     }
 
     @Override
-    public String getId() {
-        return this.getClass().getName();
-    }
-
-    @Override
     public FilmStatus getFilmStatus(Film film) throws IOException {
-        String urlParameter = "?config=1320&order=" + film.getOrderNumber() + "&shop=" + film.getShopId();
+        String urlParameter = "?config=" + config + "&order=" + film.getOrderNumber() + "&shop=" + film.getShopId();
         url = url + urlParameter;
         try {
             URLConnection connection = new URL(url).openConnection();

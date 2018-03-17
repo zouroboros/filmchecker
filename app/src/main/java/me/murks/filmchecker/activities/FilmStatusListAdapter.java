@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.LinkedList;
@@ -20,7 +21,6 @@ import me.murks.filmchecker.model.FilmStatus;
 /**
  * ListAdapter for the film list
  * @author zouroboros
- * @version 0.1 2016-05-30
  */
 public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> {
 
@@ -53,6 +53,10 @@ public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> 
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
         insertDateView.setText(String.format(view.getResources()
                 .getString(R.string.film_list_insert_date), formattedDate));
+
+        View deleteButton = view.findViewById(R.id.delete_button);
+        deleteButton.setTag(entry.first.getId());
+
         return view;
     }
 }

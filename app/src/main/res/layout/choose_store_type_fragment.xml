@@ -19,25 +19,12 @@
         android:layout_alignParentStart="true"
         android:text="@string/choose_drugstore" />
 
-    <Button
-        android:id="@+id/dm_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dmUiName"
+    <ListView
+        android:id="@+id/store_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/label"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/rm_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/dm_button"
-        android:text="@string/rossmannUiName"/>
+
 </RelativeLayout>

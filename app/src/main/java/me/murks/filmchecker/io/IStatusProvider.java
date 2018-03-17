@@ -16,12 +16,6 @@ public interface IStatusProvider {
     String getUiName();
 
     /**
-     * The id of this status provider
-     * @return The Id of the status provider
-     */
-    String getId();
-
-    /**
      * Queries the status of the given film
      * @param film The film whose status wil be queried
      * @return The status of the film order

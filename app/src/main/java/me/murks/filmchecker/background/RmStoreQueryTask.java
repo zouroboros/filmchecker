@@ -11,6 +11,7 @@ import me.murks.filmchecker.R;
 import me.murks.filmchecker.activities.AddFilmWizardActivity;
 import me.murks.filmchecker.io.RossmannApi;
 import me.murks.filmchecker.model.RmQueryModel;
+import me.murks.filmchecker.model.RmStoreModel;
 
 /**
  * Task to query the endpoint of rm store
@@ -22,10 +23,12 @@ public class RmStoreQueryTask extends AsyncTask<URL, Void, RmQueryModel> {
 
     private final ProgressDialog dialog;
     private final AddFilmWizardActivity wizard;
+    private final RmStoreModel rmModel;
 
-    public RmStoreQueryTask(AddFilmWizardActivity filmWizard) {
+    public RmStoreQueryTask(AddFilmWizardActivity filmWizard, RmStoreModel model) {
         dialog = new ProgressDialog(filmWizard);
         wizard = filmWizard;
+        rmModel = model;
     }
 
     protected void onPreExecute() {
@@ -47,7 +50,8 @@ public class RmStoreQueryTask extends AsyncTask<URL, Void, RmQueryModel> {
     @Override
     protected void onPostExecute(RmQueryModel result) {
         super.onPostExecute(result);
-        wizard.jumpToLastStep(result);
+        rmModel.setRmQueryModel(result);
+        wizard.jumpToLastStep();
         dialog.dismiss();
     }
 

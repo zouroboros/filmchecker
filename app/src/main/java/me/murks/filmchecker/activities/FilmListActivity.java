@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import me.murks.filmchecker.FilmCheckerApp;
@@ -16,7 +17,7 @@ import me.murks.filmchecker.R;
 /**
  * Activity for listing all films
  */
-public class FilmListActivity extends AppCompatActivity implements AdapterView.OnItemLongClickListener {
+public class FilmListActivity extends AppCompatActivity {
 
     private FilmCheckerApp app;
     private FilmStatusListAdapter adapter;
@@ -32,8 +33,6 @@ public class FilmListActivity extends AppCompatActivity implements AdapterView.O
         adapter = new FilmStatusListAdapter(this);
 
         ListView filmList = (ListView) findViewById(R.id.filmList);
-
-        filmList.setOnItemLongClickListener(this);
         filmList.setAdapter(adapter);
 
         loadList();
@@ -47,6 +46,11 @@ public class FilmListActivity extends AppCompatActivity implements AdapterView.O
     public void addFilmClicked(View view) {
         Intent intent = new Intent(this, AddFilmWizardActivity.class);
         startActivity(intent);
+    }
+
+    public void deleteFilmClicked(View view) {
+        app.removeFilm(this, app.getFilmById(this, (Long) view.getTag()));
+        loadList();
     }
 
     @Override
@@ -69,13 +73,11 @@ public class FilmListActivity extends AppCompatActivity implements AdapterView.O
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
+        if(id == R.id.help) {
+            Intent intent = new Intent(this, HelpActivity.class);
+            startActivity(intent);
+        }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        app.removeFilm(this, app.getFilms(this).get(position));
-        loadList();
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }

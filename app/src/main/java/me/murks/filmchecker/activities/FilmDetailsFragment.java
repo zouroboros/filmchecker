@@ -11,13 +11,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.net.URL;
 import java.util.Calendar;
+import java.util.Set;
 
 import me.murks.filmchecker.R;
-import me.murks.filmchecker.io.IStatusProvider;
 import me.murks.filmchecker.model.Film;
-import me.murks.filmchecker.model.RmQueryModel;
+import me.murks.filmchecker.model.StoreModel;
 
 /**
  * Fragment for entering the details of a film order
@@ -26,15 +25,23 @@ import me.murks.filmchecker.model.RmQueryModel;
  */
 public class FilmDetailsFragment extends Fragment {
 
-    private AddFilmWizardActivity parent;
-    private RmQueryModel rmQueryModel;
+    private static final String ARG_SECTION_NUMBER = "filmdetails";
 
-    public FilmDetailsFragment() {
+
+    private AddFilmWizardActivity parent;
+
+    public static FilmDetailsFragment newInstance(int sectionNumber) {
+        FilmDetailsFragment fragment = new FilmDetailsFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final View rootView = inflater.inflate(R.layout.film_details_fragment, container, false);
 
         Button saveButton = (Button) rootView.findViewById(R.id.saveFilmButton);
@@ -50,19 +57,12 @@ public class FilmDetailsFragment extends Fragment {
                 DatePicker picker = ((DatePicker) rootView.findViewById(R.id.insertDatePicker));
                 Calendar date = Calendar.getInstance();
                 date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
-                IStatusProvider provider = parent.getApp().getStatusProvider().getDmStatusProvider();
-                URL endpoint = null;
-                if(parent.getRmQueryModel() != null) {
-                    provider = parent.getApp().getStatusProvider().getRmStatusProvider();
-                    endpoint = parent.getRmQueryModel().queryEndpoint;
-                }
-                Film film = new Film(orderNumber, shopId, date, provider.getId(), endpoint, htNumber);
+                Film film = parent.getStoreModel().getFilm(shopId, htNumber, orderNumber, date);
                 parent.getApp().addFilm(view.getContext(), film);
                 Intent intent = new Intent(view.getContext(), FilmListActivity.class);
                 startActivity(intent);
             }
         });
-
         return rootView;
     }
 
@@ -72,22 +72,29 @@ public class FilmDetailsFragment extends Fragment {
         parent = (AddFilmWizardActivity) activity;
     }
 
-    public void setRmQueryModel(RmQueryModel model) {
-        rmQueryModel = model;
+    @Override
+    public void onResume(){
+        super.onResume();
+        setRequiredFields(parent.getStoreModel());
+    }
 
-        parent.findViewById(R.id.htnText).setEnabled(true);
-        parent.findViewById(R.id.shopId).setEnabled(true);
+    private void setRequiredFields(StoreModel model) {
+        Set<String> requiredFields = model.getRequiredFields();
 
-        // determine which fields are required and which are not
-        if(rmQueryModel != null && rmQueryModel.htNumber) {
-            // rossmann with ht-number
-            parent.findViewById(R.id.shopId).setEnabled(false);
-        } else if(rmQueryModel != null){
-            // rossmann with filialnummer
-            parent.findViewById(R.id.htnText).setEnabled(false);
-        } else if(rmQueryModel == null) {
-            // dm
-            parent.findViewById(R.id.htnText).setEnabled(false);
+        getView().findViewById(R.id.htnText).setEnabled(false);
+        getView().findViewById(R.id.shopId).setEnabled(false);
+        getView().findViewById(R.id.orderNumber).setEnabled(false);
+
+        if(requiredFields.contains(StoreModel.shopId)) {
+            getView().findViewById(R.id.shopId).setEnabled(true);
+        }
+
+        if(requiredFields.contains(StoreModel.htNumber)) {
+            getView().findViewById(R.id.htnText).setEnabled(true);
+        }
+
+        if(requiredFields.contains(StoreModel.orderNumber)) {
+            getView().findViewById(R.id.orderNumber).setEnabled(true);
         }
     }
 }

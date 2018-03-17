@@ -3,20 +3,25 @@ package me.murks.filmchecker;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.background.AsyncFilmListTask;
 import me.murks.filmchecker.io.FilmDb;
 import me.murks.filmchecker.io.StatusProviderFactory;
+import me.murks.filmchecker.model.DmAtStoreModel;
+import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.RmStoreModel;
+import me.murks.filmchecker.model.StoreModel;
 
 /**
  * Class for representing the FilmChecker app. Provides means
  * to retrieve and store data for activities.
  * @author zouroboros
- * @version 0.1 2016-05-29
  */
 public class FilmCheckerApp {
     /**
@@ -52,6 +57,22 @@ public class FilmCheckerApp {
     }
 
     /**
+     * Retrieves a film by its id. Returns the film if a film with the id exists,
+     * otherwise it returns null
+     * @param context The current context
+     * @param id The id of the film
+     * @return The film or null
+     */
+    public Film getFilmById(Context context, Long id) {
+        for (Film f: getFilms(context)) {
+            if(f.getId() == id) {
+                return f;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Permanently removes a {@see Film}
      * @param context Current context
      * @param film The {@see Film} to remove
@@ -63,5 +84,13 @@ public class FilmCheckerApp {
 
     public StatusProviderFactory getStatusProvider() {
         return new StatusProviderFactory();
+    }
+
+    /**
+     * Returns the list of supported stores
+     * @return List of supported stores
+     */
+    public List<StoreModel> getStores() {
+        return Arrays.asList(new DmDeStoreModel(this), new DmAtStoreModel(this), new RmStoreModel(this));
     }
 }

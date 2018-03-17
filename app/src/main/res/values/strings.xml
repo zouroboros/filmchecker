@@ -16,4 +16,6 @@
     <string name="choose_drugstore">Kette auswählen</string>
     <string name="rossmannUiName">Rossmann</string>
     <string name="storeZipLabel">PLZ der Filale</string>
+    <string name="dmAtUiName">DM (Österreich)</string>
+    <string name="helpMenu">Hilfe</string>
 </resources>

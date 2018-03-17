@@ -6,12 +6,12 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@drawable/film_checker_logo"
         android:label="@string/app_name"
         android:logo="@drawable/film_checker_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activities.FilmListActivity"
             android:label="@string/app_name"
@@ -24,8 +24,8 @@
         </activity>
         <activity
             android:name=".activities.AddFilmWizardActivity"
-            android:label="@string/title_activity_add_film_wizard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_add_film_wizard" />
+        <activity android:name=".activities.HelpActivity"></activity>
     </application>
 
 </manifest>
