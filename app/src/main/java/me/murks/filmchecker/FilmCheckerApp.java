@@ -22,7 +22,6 @@ import me.murks.filmchecker.model.StoreModel;
  * Class for representing the FilmChecker app. Provides means
  * to retrieve and store data for activities.
  * @author zouroboros
- * @version 0.1 2016-05-29
  */
 public class FilmCheckerApp {
     /**
@@ -55,6 +54,22 @@ public class FilmCheckerApp {
     public void addFilm(Context context, Film film) {
         FilmDb db = new FilmDb(context);
         db.addFilm(film);
+    }
+
+    /**
+     * Retrieves a film by its id. Returns the film if a film with the id exists,
+     * otherwise it returns null
+     * @param context The current context
+     * @param id The id of the film
+     * @return The film or null
+     */
+    public Film getFilmById(Context context, Long id) {
+        for (Film f: getFilms(context)) {
+            if(f.getId() == id) {
+                return f;
+            }
+        }
+        return null;
     }
 
     /**
