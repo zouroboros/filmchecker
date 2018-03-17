@@ -16,7 +16,8 @@ public class StatusProviderFactory {
      */
     public Collection<IStatusProvider> getFilmStatusProvider() {
         return Arrays.asList(new RossmannStatusProvider(),
-                new DmStatusProvider());
+                new DmStatusProvider(),
+                new DmAtStatusProvider());
     }
 
     /**
