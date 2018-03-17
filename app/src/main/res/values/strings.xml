@@ -17,4 +17,5 @@
     <string name="rossmannUiName">Rossmann</string>
     <string name="storeZipLabel">PLZ der Filale</string>
     <string name="dmAtUiName">DM (Österreich)</string>
+    <string name="helpMenu">Hilfe</string>
 </resources>

@@ -73,6 +73,11 @@ public class FilmListActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.help) {
+            Intent intent = new Intent(this, HelpActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
