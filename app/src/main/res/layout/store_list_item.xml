@@ -3,4 +3,5 @@
     android:id="@+id/store_list_item_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="5dp"
     android:textAppearance="@android:style/TextAppearance.Large" />

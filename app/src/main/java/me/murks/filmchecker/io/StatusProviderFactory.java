@@ -41,12 +41,4 @@ public class StatusProviderFactory {
     public IStatusProvider getStatusProviderById(String id) {
         return statusProvider.get(id);
     }
-
-    public IStatusProvider getDmStatusProvider() {
-        return new DmStatusProvider();
-    }
-
-    public IStatusProvider getRmStatusProvider() {
-        return new RossmannStatusProvider();
-    }
 }
