@@ -42,4 +42,9 @@ public class DmDeStoreModel implements StoreModel {
     public Set<String> getRequiredFields() {
         return Sets.newHashSet(StoreModel.shopId, StoreModel.orderNumber);
     }
+
+    @Override
+    public int getShopIdFieldName() {
+        return R.string.add_film_shop_id;
+    }
 }

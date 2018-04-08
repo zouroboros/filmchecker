@@ -19,11 +19,6 @@ import me.murks.filmchecker.model.FilmStatus;
  */
 class RossmannStatusProvider implements IStatusProvider {
 
-    @Override
-    public String getUiName() {
-        return "Rossmann";
-    }
-
     /**
      * Queries the status of the given film
      * @param film The film whose status wil be queried

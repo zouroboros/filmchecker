@@ -9,17 +9,16 @@ import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
 
 /**
- * Implementation of the {@link StoreModel} interface for austrian dm stores
+ * Implementation of the {@link StoreModel} interface for austrian Müller stores
  * @author zouroboros
- * @date 3/14/18.
+ * @date 4/8/18.
  */
-public class DmAtStoreModel implements StoreModel {
-
+public class MuellerAtStoreModel implements StoreModel {
     private final FilmCheckerApp app;
 
-    public static String StoreId = "dm.at";
+    public static String StoreId = "www.mueller-drogerie.at";
 
-    public DmAtStoreModel(FilmCheckerApp app) {
+    public MuellerAtStoreModel(FilmCheckerApp app) {
         this.app = app;
     }
 
@@ -30,7 +29,7 @@ public class DmAtStoreModel implements StoreModel {
 
     @Override
     public int getStoreName() {
-        return R.string.dmAtUiName;
+        return R.string.muellerAtUiName;
     }
 
     @Override
@@ -45,6 +44,6 @@ public class DmAtStoreModel implements StoreModel {
 
     @Override
     public int getShopIdFieldName() {
-        return R.string.add_film_shop_id;
+        return R.string.customerNumberLabel;
     }
 }
