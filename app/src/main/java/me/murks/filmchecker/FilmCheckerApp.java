@@ -15,6 +15,7 @@ import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.MuellerAtStoreModel;
 import me.murks.filmchecker.model.RmStoreModel;
 import me.murks.filmchecker.model.StoreModel;
 
@@ -91,6 +92,7 @@ public class FilmCheckerApp {
      * @return List of supported stores
      */
     public List<StoreModel> getStores() {
-        return Arrays.asList(new DmDeStoreModel(this), new DmAtStoreModel(this), new RmStoreModel(this));
+        return Arrays.asList(new DmDeStoreModel(this), new DmAtStoreModel(this),
+                new RmStoreModel(this), new MuellerAtStoreModel(this));
     }
 }

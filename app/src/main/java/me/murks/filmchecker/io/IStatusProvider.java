@@ -9,11 +9,6 @@ import me.murks.filmchecker.model.FilmStatus;
  * Interface for film status provider implementations
  */
 public interface IStatusProvider {
-    /**
-     * Gets the name of the status provider to show in the ui
-     * @return Human readable name of this status provider
-     */
-    String getUiName();
 
     /**
      * Queries the status of the given film

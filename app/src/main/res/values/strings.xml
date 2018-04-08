@@ -18,4 +18,5 @@
     <string name="storeZipLabel">PLZ der Filale</string>
     <string name="dmAtUiName">DM (Österreich)</string>
     <string name="helpMenu">Hilfe</string>
+    <string name="muellerAtUiName">Müller (Österreich)</string>
 </resources>
