@@ -43,4 +43,10 @@ public interface StoreModel {
      * @return Set of required field ids.
      */
     Set<String> getRequiredFields();
+
+    /**
+     * Returns the id of a string resource that provides the label for the store id field
+     * @return Id of ui string
+     */
+    int getShopIdFieldName();
 }

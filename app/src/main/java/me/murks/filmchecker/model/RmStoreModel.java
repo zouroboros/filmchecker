@@ -52,4 +52,9 @@ public class RmStoreModel implements StoreModel {
     public void setRmQueryModel(RmQueryModel rmQueryModel) {
         this.rmQueryModel = rmQueryModel;
     }
+
+    @Override
+    public int getShopIdFieldName() {
+        return R.string.add_film_shop_id;
+    }
 }

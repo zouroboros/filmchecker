@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.Set;
@@ -76,6 +77,12 @@ public class FilmDetailsFragment extends Fragment {
     public void onResume(){
         super.onResume();
         setRequiredFields(parent.getStoreModel());
+        setLabel(parent.getStoreModel());
+    }
+
+    private void setLabel(StoreModel model) {
+        TextView shopIdLabel = (TextView) getView().findViewById(R.id.shopIdLabel);
+        shopIdLabel.setText(getResources().getText(model.getShopIdFieldName()));
     }
 
     private void setRequiredFields(StoreModel model) {

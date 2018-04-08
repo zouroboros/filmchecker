@@ -19,4 +19,5 @@
     <string name="dmAtUiName">DM (Österreich)</string>
     <string name="helpMenu">Hilfe</string>
     <string name="muellerAtUiName">Müller (Österreich)</string>
+    <string name="customerNumberLabel">Kundennummer</string>
 </resources>
