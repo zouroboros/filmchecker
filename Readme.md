@@ -3,8 +3,7 @@ FilmChecker
 
 A simple android app to check the status of film orders. Currently only Rossmann (only in Germany) and DM (Germany and Austria) are supported.
 
-The app is available from the [F-Droid](https://f-droid.org/ "F-Droid") app
-store.
+[![Available on F-Droid](https://f-droid.org/wiki/images/c/ca/F-Droid-button_available-on_smaller.png)](https://f-droid.org/repository/browse/?fdid=me.murks.filmchecker)
 
 Pushing Updates
 ---------------
