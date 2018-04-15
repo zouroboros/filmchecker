@@ -43,7 +43,7 @@ public class MuellerAtStatusProvider implements IStatusProvider {
 
     @Override
     public FilmStatus getFilmStatus(Film film) throws IOException {
-        String urlParameter = "?config=" + config + "&fullOrderId=" + film.getOrderNumber() + "-" + film.getShopId();
+        String urlParameter = "?config=" + config + "&fullOrderId=" + film.getShopId() + "-" + film.getOrderNumber();
         url = url + urlParameter;
         try {
             URLConnection connection = new URL(url).openConnection();
