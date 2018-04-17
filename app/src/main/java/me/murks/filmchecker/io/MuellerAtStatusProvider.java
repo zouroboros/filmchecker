@@ -22,7 +22,7 @@ public class MuellerAtStatusProvider implements IStatusProvider {
     /**
      * The url to query for film info
      */
-    private String url;
+    private final String url;
     /**
      * Name of the json property containing the state of the film order
      */
@@ -44,9 +44,8 @@ public class MuellerAtStatusProvider implements IStatusProvider {
     @Override
     public FilmStatus getFilmStatus(Film film) throws IOException {
         String urlParameter = "?config=" + config + "&fullOrderId=" + film.getShopId() + "-" + film.getOrderNumber();
-        url = url + urlParameter;
         try {
-            URLConnection connection = new URL(url).openConnection();
+            URLConnection connection = new URL(url + urlParameter).openConnection();
             String jsonString = CharStreams.toString( new InputStreamReader( connection.getInputStream(), "UTF-8" ) );
             JSONObject jsonObject = new JSONObject(jsonString);
             if(jsonObject.has(SUMMARY_KEY)) {
