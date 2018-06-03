@@ -20,4 +20,6 @@
     <string name="helpMenu">Hilfe</string>
     <string name="muellerAtUiName">Müller (Österreich)</string>
     <string name="customerNumberLabel">Kundennummer</string>
+    <string name="errorMessageTitle">Fehler</string>
+    <string name="generalErrorMessage">Bei Laden der Daten ist ein Fehler aufgetreten. Stellen sie sicher das ihre Internetverbindung aktiviert ist. Vorgang wiederholen?</string>
 </resources>
