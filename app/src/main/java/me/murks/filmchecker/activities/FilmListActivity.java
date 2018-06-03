@@ -1,9 +1,12 @@
 package me.murks.filmchecker.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ public class FilmListActivity extends AppCompatActivity {
 
     private FilmCheckerApp app;
     private FilmStatusListAdapter adapter;
+    private View progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,18 @@ public class FilmListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         app = new FilmCheckerApp();
+
+        progress = findViewById(R.id.listProgress);
+        progress.setVisibility(View.INVISIBLE);
+
         adapter = new FilmStatusListAdapter(this);
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                progress.setVisibility(View.INVISIBLE);
+            }
+        });
 
         ListView filmList = (ListView) findViewById(R.id.filmList);
         filmList.setAdapter(adapter);
@@ -40,6 +55,7 @@ public class FilmListActivity extends AppCompatActivity {
 
     private void loadList() {
         adapter.clear();
+        progress.setVisibility(View.VISIBLE);
         app.fillFilmList(this, adapter).execute();
     }
 
