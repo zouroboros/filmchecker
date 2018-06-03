@@ -20,17 +20,13 @@ import me.murks.filmchecker.model.RossmannStoreLink;
 public class RmLoadStoresTask extends AsyncTask<String, Void, List<RossmannStoreLink>> {
 
     private final ArrayAdapter<RossmannStoreLink> adapter;
-    private final ProgressDialog dialog;
 
     public RmLoadStoresTask(ArrayAdapter<RossmannStoreLink> adapter) {
         this.adapter = adapter;
-        dialog = new ProgressDialog(adapter.getContext());
     }
 
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog.setMessage(dialog.getContext().getResources().getString(R.string.load_rm_store_progress));
-        dialog.show();
     }
 
     @Override
@@ -50,12 +46,6 @@ public class RmLoadStoresTask extends AsyncTask<String, Void, List<RossmannStore
         for (RossmannStoreLink store : result) {
             this.adapter.add(store);
         }
-        dialog.dismiss();
         this.adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onCancelled(List<RossmannStoreLink> result) {
-        dialog.dismiss();
     }
 }

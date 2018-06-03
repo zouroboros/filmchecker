@@ -1,6 +1,7 @@
 package me.murks.filmchecker.activities;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class RossmannChooseStoreFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "rm-store-locator";
     private AddFilmWizardActivity parent;
+    private View rmStoreProgressBar;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -53,6 +55,9 @@ public class RossmannChooseStoreFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.rossmann_choose_store_fragment, container, false);
         EditText plzInput = (EditText) rootView.findViewById(R.id.plz_input);
         ListView storeList = (ListView) rootView.findViewById(R.id.store_list);
+        rmStoreProgressBar = rootView.findViewById(R.id.rmStoreProgressBar);
+        rmStoreProgressBar.setVisibility(View.INVISIBLE);
+
         storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -63,8 +68,15 @@ public class RossmannChooseStoreFragment extends Fragment {
 
         final ArrayAdapter<RossmannStoreLink> storeAdapter = new ArrayAdapter<>(getContext(), R.layout.rm_store_list_item, R.id.rm_store_list_item_text);
         storeList.setAdapter(storeAdapter);
+        storeAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                rmStoreProgressBar.setVisibility(View.INVISIBLE);
+            }
+        });
 
-        plzInput.addTextChangedListener(new RmStoreListTextWatcher(storeAdapter));
+        plzInput.addTextChangedListener(new RmStoreListTextWatcher(storeAdapter, rmStoreProgressBar));
 
         return rootView;
     }
