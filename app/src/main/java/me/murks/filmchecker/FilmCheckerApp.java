@@ -1,5 +1,6 @@
 package me.murks.filmchecker;
 
+import android.app.Dialog;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class FilmCheckerApp {
     public AsyncFilmListTask fillFilmList(Context context, FilmStatusListAdapter adapter) {
         FilmDb db = new FilmDb(context);
         Collection<Film> films = db.getFilms();
-        return new AsyncFilmListTask(context, adapter, films, getStatusProvider());
+        return new AsyncFilmListTask(adapter, films, getStatusProvider());
     }
 
     /**

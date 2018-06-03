@@ -4,7 +4,7 @@
     <string name="update_film_list">Filmliste aktualisieren</string>
     <string name="add_film_order_number">Auftragsnummer</string>
     <string name="add_film_shop_id">Filialnummer</string>
-    <string name="film_list_updateing_list">Aktualisiere Filmliste</string>
+    <string name="film_list_updating_list">Aktualisiere Filmliste</string>
     <string name="film_list_insert_date">(%s)</string>
     <string name="title_activity_add_film_wizard">Film hinzufügen</string>
     <string name="action_settings">Settings</string>
@@ -20,4 +20,6 @@
     <string name="helpMenu">Hilfe</string>
     <string name="muellerAtUiName">Müller (Österreich)</string>
     <string name="customerNumberLabel">Kundennummer</string>
+    <string name="errorMessageTitle">Fehler</string>
+    <string name="generalErrorMessage">Bei Laden der Daten ist ein Fehler aufgetreten. Stellen sie sicher das ihre Internetverbindung aktiviert ist. Vorgang wiederholen?</string>
 </resources>

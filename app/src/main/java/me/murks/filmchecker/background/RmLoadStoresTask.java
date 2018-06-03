@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import me.murks.filmchecker.R;
+import me.murks.filmchecker.activities.ErrorReceiver;
 import me.murks.filmchecker.io.RossmannApi;
 import me.murks.filmchecker.model.RossmannStoreLink;
 
@@ -20,17 +21,15 @@ import me.murks.filmchecker.model.RossmannStoreLink;
 public class RmLoadStoresTask extends AsyncTask<String, Void, List<RossmannStoreLink>> {
 
     private final ArrayAdapter<RossmannStoreLink> adapter;
-    private final ProgressDialog dialog;
+    private final ErrorReceiver errorReceiver;
 
-    public RmLoadStoresTask(ArrayAdapter<RossmannStoreLink> adapter) {
+    public RmLoadStoresTask(ArrayAdapter<RossmannStoreLink> adapter, ErrorReceiver receiver) {
         this.adapter = adapter;
-        dialog = new ProgressDialog(adapter.getContext());
+        errorReceiver = receiver;
     }
 
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog.setMessage(dialog.getContext().getResources().getString(R.string.load_rm_store_progress));
-        dialog.show();
     }
 
     @Override
@@ -46,16 +45,15 @@ public class RmLoadStoresTask extends AsyncTask<String, Void, List<RossmannStore
     @Override
     protected void onPostExecute(List<RossmannStoreLink> result) {
         super.onPostExecute(result);
-        this.adapter.clear();
-        for (RossmannStoreLink store : result) {
-            this.adapter.add(store);
+        adapter.clear();
+        if (result != null) {
+            for (RossmannStoreLink store : result) {
+                adapter.add(store);
+            }
         }
-        dialog.dismiss();
-        this.adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onCancelled(List<RossmannStoreLink> result) {
-        dialog.dismiss();
+        else {
+            errorReceiver.errorOccured();
+        }
+        adapter.notifyDataSetChanged();
     }
 }

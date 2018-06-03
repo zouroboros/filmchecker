@@ -88,20 +88,27 @@ public class FilmDetailsFragment extends Fragment {
     private void setRequiredFields(StoreModel model) {
         Set<String> requiredFields = model.getRequiredFields();
 
-        getView().findViewById(R.id.htnText).setEnabled(false);
-        getView().findViewById(R.id.shopId).setEnabled(false);
-        getView().findViewById(R.id.orderNumber).setEnabled(false);
+        getView().findViewById(R.id.htnText).setVisibility(View.INVISIBLE);
+        getView().findViewById(R.id.shopId).setVisibility(View.INVISIBLE);
+        getView().findViewById(R.id.orderNumber).setVisibility(View.INVISIBLE);
+
+        getView().findViewById(R.id.htnLabel).setVisibility(View.INVISIBLE);
+        getView().findViewById(R.id.shopIdLabel).setVisibility(View.INVISIBLE);
+        getView().findViewById(R.id.orderNumberLabel).setVisibility(View.INVISIBLE);
 
         if(requiredFields.contains(StoreModel.shopId)) {
-            getView().findViewById(R.id.shopId).setEnabled(true);
+            getView().findViewById(R.id.shopIdLabel).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.shopId).setVisibility(View.VISIBLE);
         }
 
         if(requiredFields.contains(StoreModel.htNumber)) {
-            getView().findViewById(R.id.htnText).setEnabled(true);
+            getView().findViewById(R.id.htnLabel).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.htnText).setVisibility(View.VISIBLE);
         }
 
         if(requiredFields.contains(StoreModel.orderNumber)) {
-            getView().findViewById(R.id.orderNumber).setEnabled(true);
+            getView().findViewById(R.id.orderNumberLabel).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.orderNumber).setVisibility(View.VISIBLE);
         }
     }
 }
