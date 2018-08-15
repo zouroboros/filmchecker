@@ -17,6 +17,7 @@ import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.MuellerAtStoreModel;
+import me.murks.filmchecker.model.MuellerDeStoreModel;
 import me.murks.filmchecker.model.RmStoreModel;
 import me.murks.filmchecker.model.StoreModel;
 
@@ -94,6 +95,7 @@ public class FilmCheckerApp {
      */
     public List<StoreModel> getStores() {
         return Arrays.asList(new DmDeStoreModel(this), new DmAtStoreModel(this),
-                new RmStoreModel(this), new MuellerAtStoreModel(this));
+                new RmStoreModel(this), new MuellerAtStoreModel(this),
+                new MuellerDeStoreModel(this));
     }
 }
