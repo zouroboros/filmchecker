@@ -110,5 +110,6 @@ public class FilmDetailsFragment extends Fragment {
             getView().findViewById(R.id.orderNumberLabel).setVisibility(View.VISIBLE);
             getView().findViewById(R.id.orderNumber).setVisibility(View.VISIBLE);
         }
+        getView().findViewById(R.id.orderNumber).requestFocus();
     }
 }
