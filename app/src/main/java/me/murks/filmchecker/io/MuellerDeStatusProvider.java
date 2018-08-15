@@ -16,12 +16,14 @@ import me.murks.filmchecker.model.FilmStatus;
 /**
  * Implementation of the {@link IStatusProvider} interface for austrian Müller stores
  * @author zouroboros
+ * @date 4/8/18.
  */
-public class MuellerAtStatusProvider extends MuellerStatusProvider implements IStatusProvider {
+public class MuellerDeStatusProvider extends MuellerStatusProvider implements IStatusProvider {
+
     /**
      * Creates a new MuellerAtStatusProvider
      */
-    public MuellerAtStatusProvider() {
-        super("3241");
+    public MuellerDeStatusProvider() {
+        super("3018");
     }
 }

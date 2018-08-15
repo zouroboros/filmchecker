@@ -12,9 +12,9 @@
     <string name="query_store_methods">Lade Filiale</string>
     <string name="htn_number">HT-NR.</string>
     <string name="save_film">Film speichern</string>
-    <string name="dmUiName">DM</string>
+    <string name="dmUiName">DM (Deutschland)</string>
     <string name="choose_drugstore">Kette auswählen</string>
-    <string name="rossmannUiName">Rossmann</string>
+    <string name="rossmannUiName">Rossmann (Deutschland)</string>
     <string name="storeZipLabel">PLZ der Filale</string>
     <string name="dmAtUiName">DM (Österreich)</string>
     <string name="helpMenu">Hilfe</string>
@@ -22,4 +22,5 @@
     <string name="customerNumberLabel">Kundennummer</string>
     <string name="errorMessageTitle">Fehler</string>
     <string name="generalErrorMessage">Bei Laden der Daten ist ein Fehler aufgetreten. Stellen sie sicher das ihre Internetverbindung aktiviert ist. Vorgang wiederholen?</string>
+    <string name="muellerDeUiName">Müller (Deutschland)</string>
 </resources>

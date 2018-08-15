@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.MuellerAtStoreModel;
+import me.murks.filmchecker.model.MuellerDeStoreModel;
 import me.murks.filmchecker.model.RmStoreModel;
 
 /**
@@ -25,6 +26,7 @@ public class StatusProviderFactory {
         statusProvider.put(RmStoreModel.StoreId, new RossmannStatusProvider());
         statusProvider.put(DmAtStoreModel.StoreId, new DmAtStatusProvider());
         statusProvider.put(MuellerAtStoreModel.StoreId, new MuellerAtStatusProvider());
+        statusProvider.put(MuellerDeStoreModel.StoreId, new MuellerDeStatusProvider());
     }
 
     /**
