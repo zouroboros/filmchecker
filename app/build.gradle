@@ -8,8 +8,8 @@ android {
         applicationId "me.murks.filmchecker"
         minSdkVersion 13
         targetSdkVersion 25
-        versionCode 12
-        versionName "1.4.3"
+        versionCode 13
+        versionName "1.4.4"
     }
     buildTypes {
         release {
