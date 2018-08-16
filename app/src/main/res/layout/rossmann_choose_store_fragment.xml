@@ -25,7 +25,8 @@
         android:layout_below="@+id/section_label"
         android:ems="10"
         android:inputType="textCapWords|textPersonName"
-        tools:text="PLZ" />
+        tools:text="PLZ"
+        android:hint="@string/storeZipLabel"/>
 
 
     <ProgressBar
