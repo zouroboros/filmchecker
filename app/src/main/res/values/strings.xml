@@ -7,7 +7,7 @@
     <string name="film_list_updating_list">Aktualisiere Filmliste</string>
     <string name="film_list_insert_date">(%s)</string>
     <string name="title_activity_add_film_wizard">Film hinzufügen</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Einstellungen</string>
     <string name="load_rm_store_progress">Suche Filialen</string>
     <string name="query_store_methods">Lade Filiale</string>
     <string name="htn_number">HT-NR.</string>
