@@ -51,7 +51,7 @@ public class RmStoreQueryTask extends AsyncTask<URL, Void, RmQueryModel> {
     protected void onPostExecute(RmQueryModel result) {
         super.onPostExecute(result);
         rmModel.setRmQueryModel(result);
-        wizard.jumpToLastStep();
+        wizard.jumpToLastStep(rmModel, result);
         dialog.dismiss();
     }
 

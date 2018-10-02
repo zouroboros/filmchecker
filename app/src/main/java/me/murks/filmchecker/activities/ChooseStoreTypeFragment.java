@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
@@ -26,18 +25,6 @@ public class ChooseStoreTypeFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "choosestoretype";
 
     public ChooseStoreTypeFragment() {
-    }
-
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
-    public static ChooseStoreTypeFragment newInstance(int sectionNumber) {
-        ChooseStoreTypeFragment fragment = new ChooseStoreTypeFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
