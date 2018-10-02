@@ -1,6 +1,5 @@
 package me.murks.filmchecker.io;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;

@@ -34,7 +34,7 @@ public class MuellerStatusProvider implements IStatusProvider {
     /**
      * Creates a new MuellerStatusProvider
      */
-    public MuellerStatusProvider(String configId) {
+    MuellerStatusProvider(String configId) {
         url = "https://spot.photoprintit.com/spotapi/orderInfo/order";
         config = configId;
     }

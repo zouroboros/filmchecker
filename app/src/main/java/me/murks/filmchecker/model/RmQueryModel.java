@@ -31,7 +31,7 @@ public class RmQueryModel implements Parcelable {
         dest.writeString(this.queryEndpoint.toString());
     }
 
-    protected RmQueryModel(Parcel in) {
+    private RmQueryModel(Parcel in) {
         this.htNumber = (Boolean) in.readValue(Boolean.class.getClassLoader());
         try {
             this.queryEndpoint = new URL(in.readString());

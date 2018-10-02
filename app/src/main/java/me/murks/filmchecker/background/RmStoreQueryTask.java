@@ -15,7 +15,6 @@ import me.murks.filmchecker.model.RmStoreModel;
 
 /**
  * Task to query the endpoint of rm store
- * @date 09/19/2017
  * @author zouroboros
  */
 

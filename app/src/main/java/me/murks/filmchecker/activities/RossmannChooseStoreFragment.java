@@ -67,7 +67,7 @@ public class RossmannChooseStoreFragment extends StoreModelFragment implements E
     }
 
     @Override
-    public void errorOccured() {
+    public void errorOccurred() {
         new AlertDialog.Builder(getActivity()).setMessage(R.string.generalErrorMessage)
                 .setTitle(R.string.errorMessageTitle)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

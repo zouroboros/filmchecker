@@ -1,7 +1,5 @@
 package me.murks.filmchecker.model;
 
-import android.support.annotation.Nullable;
-
 import java.net.URL;
 import java.util.Calendar;
 
@@ -18,7 +16,7 @@ public class Film {
     private final Calendar insertDate;
     private final String statusProvider;
     private final URL rmEndpoint;
-    private final String htnumber;
+    private final String htNumber;
 
     /**
      * Constructs a new Film with the given values without the id
@@ -27,16 +25,16 @@ public class Film {
      * @param insertDate The date the film was entered into the application
      * @param statusProvider The id of the status provider for this film
      * @param rmEndpoint URL of the rm endpoint to query for this order
-     * @param htnumber The htnumber of the store
+     * @param htNumber The htNumber of the store
      *
      */
-    public Film(String orderNumber, String shopId, Calendar insertDate, String statusProvider, URL rmEndpoint, String htnumber) {
+    public Film(String orderNumber, String shopId, Calendar insertDate, String statusProvider, URL rmEndpoint, String htNumber) {
         this.orderNumber = orderNumber;
         this.shopId = shopId;
         this.insertDate = insertDate;
         this.statusProvider = statusProvider;
         this.rmEndpoint = rmEndpoint;
-        this.htnumber = htnumber;
+        this.htNumber = htNumber;
         this.id = null;
     }
 
@@ -48,16 +46,16 @@ public class Film {
      * @param insertDate The date the film was entered into the application
      * @param statusProvider The id of the status provider for this film
      * @param rmEndpoint URL of the rm endpoint to query for this order
-     * @param htnumber The htnumber of the store
+     * @param htNumber The htNumber of the store
      *
      */
-    public Film(long id, String orderNumber, String shopId, Calendar insertDate, String statusProvider, URL rmEndpoint, String htnumber) {
+    public Film(long id, String orderNumber, String shopId, Calendar insertDate, String statusProvider, URL rmEndpoint, String htNumber) {
         this.orderNumber = orderNumber;
         this.shopId = shopId;
         this.insertDate = insertDate;
         this.statusProvider = statusProvider;
         this.rmEndpoint = rmEndpoint;
-        this.htnumber = htnumber;
+        this.htNumber = htNumber;
         this.id = id;
     }
 
@@ -103,8 +101,8 @@ public class Film {
     /**
      * @return The HT number of the store
      */
-    public String getHtnumber() {
-        return htnumber;
+    public String getHtNumber() {
+        return htNumber;
     }
 
     /**

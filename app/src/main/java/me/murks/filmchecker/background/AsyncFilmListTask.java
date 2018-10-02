@@ -1,8 +1,5 @@
 package me.murks.filmchecker.background;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Pair;
 
@@ -11,8 +8,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import me.murks.filmchecker.R;
-import me.murks.filmchecker.activities.FilmListActivity;
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.Film;
@@ -40,11 +35,6 @@ public class AsyncFilmListTask extends AsyncTask<String, Void, List<Pair<Film, F
         super.onPostExecute(result);
         adapter.addAll(result);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override

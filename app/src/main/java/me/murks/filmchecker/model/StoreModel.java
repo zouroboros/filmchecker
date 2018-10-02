@@ -8,7 +8,6 @@ import java.util.Set;
  *
  * A store model describes how a film is added depending on the store where the film is developed
  * @author zouroboros
- * @date 3/14/18.
  */
 public interface StoreModel {
     String htNumber = "htNumber";

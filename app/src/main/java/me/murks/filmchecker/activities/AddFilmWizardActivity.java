@@ -1,7 +1,6 @@
 package me.murks.filmchecker.activities;
 
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 import me.murks.filmchecker.FilmCheckerApp;
@@ -12,11 +11,6 @@ import me.murks.filmchecker.model.StoreModel;
 public class AddFilmWizardActivity extends FragmentActivity {
 
     private FilmCheckerApp app;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

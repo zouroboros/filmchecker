@@ -18,14 +18,6 @@ import me.murks.filmchecker.model.StoreModel;
  * A placeholder fragment containing a simple view.
  */
 public class ChooseStoreTypeFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "choosestoretype";
-
-    public ChooseStoreTypeFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

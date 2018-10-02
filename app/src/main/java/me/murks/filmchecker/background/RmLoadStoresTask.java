@@ -1,6 +1,5 @@
 package me.murks.filmchecker.background;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import me.murks.filmchecker.R;
 import me.murks.filmchecker.activities.ErrorReceiver;
 import me.murks.filmchecker.io.RossmannApi;
 import me.murks.filmchecker.model.RossmannStoreLink;
@@ -26,10 +24,6 @@ public class RmLoadStoresTask extends AsyncTask<String, Void, List<RossmannStore
     public RmLoadStoresTask(ArrayAdapter<RossmannStoreLink> adapter, ErrorReceiver receiver) {
         this.adapter = adapter;
         errorReceiver = receiver;
-    }
-
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override
@@ -52,7 +46,7 @@ public class RmLoadStoresTask extends AsyncTask<String, Void, List<RossmannStore
             }
         }
         else {
-            errorReceiver.errorOccured();
+            errorReceiver.errorOccurred();
         }
         adapter.notifyDataSetChanged();
     }

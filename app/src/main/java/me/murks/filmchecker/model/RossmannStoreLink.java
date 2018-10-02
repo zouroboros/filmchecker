@@ -3,8 +3,7 @@ package me.murks.filmchecker.model;
 import java.net.URL;
 
 /**
- * Class to hold informations about an rm store
- * @date 9/19/2017
+ * Class to hold information about an rm store
  * @author zouroboros
  */
 
