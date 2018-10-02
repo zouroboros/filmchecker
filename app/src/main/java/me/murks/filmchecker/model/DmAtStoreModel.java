@@ -47,4 +47,9 @@ public class DmAtStoreModel implements StoreModel {
     public int getShopIdFieldName() {
         return R.string.add_film_shop_id;
     }
+
+    @Override
+    public String getStoreId() {
+        return StoreId;
+    }
 }

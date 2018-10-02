@@ -46,4 +46,9 @@ public class MuellerDeStoreModel implements StoreModel {
     public int getShopIdFieldName() {
         return R.string.customerNumberLabel;
     }
+
+    @Override
+    public String getStoreId() {
+        return StoreId;
+    }
 }

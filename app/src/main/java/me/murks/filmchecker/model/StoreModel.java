@@ -49,4 +49,10 @@ public interface StoreModel {
      * @return Id of ui string
      */
     int getShopIdFieldName();
+
+    /**
+     * Returns a unique string to identify this store model
+     * @return Unique id
+     */
+    String getStoreId();
 }
