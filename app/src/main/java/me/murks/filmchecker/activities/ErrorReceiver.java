@@ -5,5 +5,5 @@ package me.murks.filmchecker.activities;
  * @author zouroboros
  */
 public interface ErrorReceiver {
-    public void errorOccured();
+    void errorOccurred();
 }

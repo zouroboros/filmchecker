@@ -15,7 +15,6 @@ import me.murks.filmchecker.model.RmStoreModel;
 
 /**
  * Task to query the endpoint of rm store
- * @date 09/19/2017
  * @author zouroboros
  */
 
@@ -51,7 +50,7 @@ public class RmStoreQueryTask extends AsyncTask<URL, Void, RmQueryModel> {
     protected void onPostExecute(RmQueryModel result) {
         super.onPostExecute(result);
         rmModel.setRmQueryModel(result);
-        wizard.jumpToLastStep();
+        wizard.jumpToLastStep(rmModel, result);
         dialog.dismiss();
     }
 

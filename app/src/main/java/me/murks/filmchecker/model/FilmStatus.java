@@ -1,5 +1,7 @@
 package me.murks.filmchecker.model;
 
+import java.util.Date;
+
 /**
  * Model for the status of a film order
  * @author zouroboros
@@ -11,12 +13,16 @@ public class FilmStatus {
      */
     private final String status;
 
+    private final Date date;
+
     /**
      * Constructs a new FilmStatus with the given status
-     * @param status The status
+     * @param newStatus The status
+     * @param newDate The date of status
      */
-    public FilmStatus(String status) {
-        this.status = status;
+    public FilmStatus(String newStatus, Date newDate) {
+        status = newStatus;
+        date = newDate;
     }
 
     /**
@@ -26,4 +32,10 @@ public class FilmStatus {
     public String getStatus() {
         return status;
     }
+
+    /**
+     * Returns the date for the status
+     * @return Status date
+     */
+    public Date getDate() { return date; }
 }

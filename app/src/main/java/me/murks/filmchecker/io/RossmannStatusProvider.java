@@ -4,7 +4,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,28 +29,31 @@ class RossmannStatusProvider implements IStatusProvider {
         if(film.getRmEndpoint() != null) {
             url = film.getRmEndpoint();
         }
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
         if(film.getShopId() != null) {
             Map<String, String> params = new HashMap<>();
             params.put("bagId", film.getOrderNumber());
             params.put("outletId", film.getShopId());
             String response = HttpHelper.post(url, params);
-            Pattern matchPattern = Pattern.compile("(?:<td class=\"boxHalf\">Auftragsstatus:</td>\\s*<td class=\"boxHalf\">)([\\w \\s \\/ \\.]*)(?:</td>)");
+            Pattern matchPattern = Pattern.compile("(?:<td class=\"boxHalf\">Auftragsstatus:" +
+                    "</td>\\s*<td class=\"boxHalf\">)([\\w \\s \\/ \\.]*)(?:</td>)");
             Matcher match = matchPattern.matcher(response);
+
             if(match.find()) {
                 String status = match.group(1);
-                return new FilmStatus(status.trim());
+                return new FilmStatus(status.trim(), null);
             }
+
+            throw new IOException();
         } else {
             Map<String, String> params = new HashMap<>();
             params.put("AUFNR_A", film.getOrderNumber());
-            params.put("FIRMA", film.getHtnumber().substring(0, 2));
-            params.put("HDNR", film.getHtnumber().substring(2));
+            params.put("FIRMA", film.getHtNumber().substring(0, 2));
+            params.put("HDNR", film.getHtNumber().substring(2));
             String response = HttpHelper.post(url, params);
             Document dom = Jsoup.parse(response);
-            return new FilmStatus(dom.select(".trackingContBox div[align='center']").text());
+            return new FilmStatus(dom.select(".trackingContBox div[align='center']").text(),
+                    null);
         }
-
-        return new FilmStatus("Error");
     }
 }

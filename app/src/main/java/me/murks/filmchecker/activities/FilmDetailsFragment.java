@@ -3,7 +3,6 @@ package me.murks.filmchecker.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,20 +23,9 @@ import me.murks.filmchecker.model.StoreModel;
  * @author zouroboros
  * @version 9/15/17.
  */
-public class FilmDetailsFragment extends Fragment {
-
-    private static final String ARG_SECTION_NUMBER = "filmdetails";
-
+public class FilmDetailsFragment extends StoreModelFragment {
 
     private AddFilmWizardActivity parent;
-
-    public static FilmDetailsFragment newInstance(int sectionNumber) {
-        FilmDetailsFragment fragment = new FilmDetailsFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +46,7 @@ public class FilmDetailsFragment extends Fragment {
                 DatePicker picker = ((DatePicker) rootView.findViewById(R.id.insertDatePicker));
                 Calendar date = Calendar.getInstance();
                 date.set(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
-                Film film = parent.getStoreModel().getFilm(shopId, htNumber, orderNumber, date);
+                Film film = storeModel.getFilm(shopId, htNumber, orderNumber, date);
                 parent.getApp().addFilm(view.getContext(), film);
                 Intent intent = new Intent(view.getContext(), FilmListActivity.class);
                 startActivity(intent);
@@ -74,10 +62,10 @@ public class FilmDetailsFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
-        setRequiredFields(parent.getStoreModel());
-        setLabel(parent.getStoreModel());
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setRequiredFields(storeModel);
+        setLabel(storeModel);
     }
 
     private void setLabel(StoreModel model) {

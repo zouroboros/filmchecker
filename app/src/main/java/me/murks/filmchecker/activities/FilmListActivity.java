@@ -1,17 +1,13 @@
 package me.murks.filmchecker.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import me.murks.filmchecker.FilmCheckerApp;

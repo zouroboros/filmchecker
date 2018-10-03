@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,31 +22,13 @@ import me.murks.filmchecker.model.RossmannStoreLink;
 
 /**
  * Fragment to choose the rm store
- * @date 9/19/2017
  * @author zouroboros
  */
-public class RossmannChooseStoreFragment extends Fragment implements ErrorReceiver {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "rm-store-locator";
+public class RossmannChooseStoreFragment extends StoreModelFragment implements ErrorReceiver {
     private AddFilmWizardActivity parent;
     private View rmStoreProgressBar;
     private TextWatcher plzInputTextWatcher;
     private EditText plzInput;
-
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
-    public static RossmannChooseStoreFragment newInstance(int sectionNumber) {
-        RossmannChooseStoreFragment fragment = new RossmannChooseStoreFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onAttach(Context activity) {
@@ -63,15 +44,13 @@ public class RossmannChooseStoreFragment extends Fragment implements ErrorReceiv
         ListView storeList = (ListView) rootView.findViewById(R.id.store_list);
         rmStoreProgressBar = rootView.findViewById(R.id.rmStoreProgressBar);
         rmStoreProgressBar.setVisibility(View.INVISIBLE);
-
         storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 RossmannStoreLink link = (RossmannStoreLink) adapterView.getAdapter().getItem(i);
-                new RmStoreQueryTask(parent, (RmStoreModel) parent.getStoreModel()).execute(link.storeUrl);
+                new RmStoreQueryTask(parent, (RmStoreModel) storeModel).execute(link.storeUrl);
             }
         });
-
         final ArrayAdapter<RossmannStoreLink> storeAdapter = new ArrayAdapter<>(getContext(), R.layout.rm_store_list_item, R.id.rm_store_list_item_text);
         storeList.setAdapter(storeAdapter);
         storeAdapter.registerDataSetObserver(new DataSetObserver() {
@@ -88,7 +67,7 @@ public class RossmannChooseStoreFragment extends Fragment implements ErrorReceiv
     }
 
     @Override
-    public void errorOccured() {
+    public void errorOccurred() {
         new AlertDialog.Builder(getActivity()).setMessage(R.string.generalErrorMessage)
                 .setTitle(R.string.errorMessageTitle)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

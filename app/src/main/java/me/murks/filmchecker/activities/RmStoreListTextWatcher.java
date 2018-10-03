@@ -15,7 +15,7 @@ import me.murks.filmchecker.model.RossmannStoreLink;
 class RmStoreListTextWatcher implements TextWatcher {
     private final ArrayAdapter<RossmannStoreLink> storeAdapter;
     private RmLoadStoresTask task;
-    private View rmProgressBar;
+    private final View rmProgressBar;
     private final ErrorReceiver errorReceiver;
 
     /**

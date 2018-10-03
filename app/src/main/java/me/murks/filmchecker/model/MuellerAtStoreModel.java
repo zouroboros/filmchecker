@@ -5,22 +5,15 @@ import com.google.common.collect.Sets;
 import java.util.Calendar;
 import java.util.Set;
 
-import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
 
 /**
  * Implementation of the {@link StoreModel} interface for austrian Müller stores
  * @author zouroboros
- * @date 4/8/18.
  */
 public class MuellerAtStoreModel implements StoreModel {
-    private final FilmCheckerApp app;
 
-    public static String StoreId = "www.mueller-drogerie.at";
-
-    public MuellerAtStoreModel(FilmCheckerApp app) {
-        this.app = app;
-    }
+    public static final String StoreId = "www.mueller-drogerie.at";
 
     @Override
     public Film getFilm(String shopId, String htNumber, String orderNumber, Calendar date) {
@@ -45,5 +38,10 @@ public class MuellerAtStoreModel implements StoreModel {
     @Override
     public int getShopIdFieldName() {
         return R.string.customerNumberLabel;
+    }
+
+    @Override
+    public String getStoreId() {
+        return StoreId;
     }
 }

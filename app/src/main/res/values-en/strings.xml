@@ -11,7 +11,7 @@
     <string name="query_store_methods">Query store</string>
     <string name="save_film">Save film</string>
     <string name="choose_drugstore">Choose store chain</string>
-    <string name="storeZipLabel">Store\'s zipcode</string>
+    <string name="storeZipLabel">Store\'s zip code</string>
     <string name="dmAtUiName">DM (Austria)</string>
     <string name="helpMenu">Help</string>
     <string name="muellerAtUiName">Müller (Austria)</string>
@@ -24,4 +24,5 @@
     <string name="film_list_insert_date">(%s)</string>
     <string name="action_settings">Settings</string>
     <string name="htn_number">HT-NR.</string>
+    <string name="deleteButtonDesc">Delete</string>
 </resources>

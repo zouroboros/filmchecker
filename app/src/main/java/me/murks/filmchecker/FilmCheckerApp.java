@@ -1,13 +1,11 @@
 package me.murks.filmchecker;
 
-import android.app.Dialog;
 import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import me.murks.filmchecker.activities.FilmStatusListAdapter;
 import me.murks.filmchecker.background.AsyncFilmListTask;
@@ -44,7 +42,7 @@ public class FilmCheckerApp {
      * @param context Current context
      * @return A {@see List} of {@link Film}s
      */
-    public List<Film> getFilms(Context context) {
+    private List<Film> getFilms(Context context) {
         FilmDb db = new FilmDb(context);
         return new ArrayList<>(db.getFilms());
     }
@@ -68,7 +66,7 @@ public class FilmCheckerApp {
      */
     public Film getFilmById(Context context, Long id) {
         for (Film f: getFilms(context)) {
-            if(f.getId() == id) {
+            if(f.getId().equals(id)) {
                 return f;
             }
         }
@@ -85,7 +83,7 @@ public class FilmCheckerApp {
         db.deleteFilm(film);
     }
 
-    public StatusProviderFactory getStatusProvider() {
+    private StatusProviderFactory getStatusProvider() {
         return new StatusProviderFactory();
     }
 
@@ -94,8 +92,8 @@ public class FilmCheckerApp {
      * @return List of supported stores
      */
     public List<StoreModel> getStores() {
-        return Arrays.asList(new DmDeStoreModel(this), new DmAtStoreModel(this),
-                new RmStoreModel(this), new MuellerAtStoreModel(this),
-                new MuellerDeStoreModel(this));
+        return Arrays.asList(new DmDeStoreModel(), new DmAtStoreModel(),
+                new RmStoreModel(), new MuellerAtStoreModel(),
+                new MuellerDeStoreModel());
     }
 }
