@@ -63,16 +63,18 @@ public class MuellerStatusProvider implements IStatusProvider {
 
     @Override
     public FilmStatus getFilmStatus(Film film) throws IOException {
-        String urlParameter = "?config=" + config + "&fullOrderId=" + film.getShopId() + "-" + film.getOrderNumber();
+        String urlParameter = "?config=" + config + "&fullOrderId="
+                + film.getShopId() + "-" + film.getOrderNumber();
         try {
             URLConnection connection = new URL(url + urlParameter).openConnection();
-            String jsonString = CharStreams.toString( new InputStreamReader( connection.getInputStream(), "UTF-8" ) );
+            String jsonString = CharStreams.toString(
+                    new InputStreamReader( connection.getInputStream(), "UTF-8" ));
             JSONObject jsonObject = new JSONObject(jsonString);
+            DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.GERMAN);
 
             if(jsonObject.has(SUBORDERS_KEY) &&
                     jsonObject.getJSONArray(SUBORDERS_KEY).length() > 0) {
                 JSONArray subOrders = jsonObject.getJSONArray(SUBORDERS_KEY);
-                DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.GERMAN);
                 Date stateDate = format.parse(jsonObject.getString(SUMMARY_DATE_KEY));
                 String state = jsonObject.getString(SUMMARY_KEY);
                 for(int i = 0; i < subOrders.length(); i++) {
@@ -83,10 +85,11 @@ public class MuellerStatusProvider implements IStatusProvider {
                         state = subOrder.getString(SUBORDER_STATE_KEY);
                     }
                 }
-                return new FilmStatus(state);
+                return new FilmStatus(state, stateDate);
             }
             else {
-                return new FilmStatus(jsonObject.getString(SUMMARY_KEY));
+                return new FilmStatus(jsonObject.getString(SUMMARY_KEY),
+                        format.parse(jsonObject.getString(SUMMARY_DATE_KEY)));
             }
         } catch(JSONException e) {
             throw new IOException(e);

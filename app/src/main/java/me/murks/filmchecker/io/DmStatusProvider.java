@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
@@ -25,7 +29,10 @@ class DmStatusProvider implements IStatusProvider {
      * Name of the json property containing the state of the film order
      */
     private static final String SUMMARY_KEY = "summaryStateText";
-
+    /**
+     * Json date field that contains the state date
+     */
+    private static final String SUMMARY_DATE_KEY = "summaryDate";
     /**
      * Value for config parameter used for requesting the film details
      */
@@ -49,17 +56,21 @@ class DmStatusProvider implements IStatusProvider {
 
     @Override
     public FilmStatus getFilmStatus(Film film) throws IOException {
-        String urlParameter = "?config=" + config + "&order=" + film.getOrderNumber() + "&shop=" + film.getShopId();
+        String urlParameter = "?config=" + config + "&order="
+                + film.getOrderNumber() + "&shop=" + film.getShopId();
         try {
             URLConnection connection = new URL(url + urlParameter).openConnection();
-            String jsonString = CharStreams.toString( new InputStreamReader( connection.getInputStream(), "UTF-8" ) );
+            String jsonString = CharStreams.toString(
+                    new InputStreamReader(connection.getInputStream(), "UTF-8" ) );
             JSONObject jsonObject = new JSONObject(jsonString);
-            if(jsonObject.has(SUMMARY_KEY)) {
-                return new FilmStatus(jsonObject.getString(SUMMARY_KEY));
-            }
+            DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.GERMAN);
+            return new FilmStatus(jsonObject.getString(SUMMARY_KEY),
+                    format.parse(jsonObject.getString(SUMMARY_DATE_KEY)));
+
         } catch(JSONException e) {
             throw new IOException(e);
+        } catch (ParseException e) {
+            throw new IOException(e);
         }
-        throw new IOException();
     }
 }
