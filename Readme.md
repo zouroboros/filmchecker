@@ -1,7 +1,7 @@
-FilmChecker
+FilmChecker [![Build Status](https://travis-ci.org/zouroboros/filmchecker.svg?branch=master)](https://travis-ci.org/zouroboros/filmchecker)
 ===========
 
-A simple android app to check the status of film orders. Currently only Rossmann (only in Germany) and DM (Germany and Austria) are supported.
+A simple android app to check the status of (photographic) film orders. Currently Rossmann (only in Germany), DM (Germany and Austria) and Müller (Germany and Austria) are supported.
 
 The app is available from the [F-Droid](https://f-droid.org/ "F-Droid") app
 store.
