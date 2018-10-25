@@ -1,14 +1,14 @@
 package me.murks.filmchecker.activities;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
 import me.murks.filmchecker.model.RmQueryModel;
 import me.murks.filmchecker.model.StoreModel;
 
-public class AddFilmWizardActivity extends FragmentActivity {
+public class AddFilmWizardActivity extends AppCompatActivity {
 
     private FilmCheckerApp app;
 
