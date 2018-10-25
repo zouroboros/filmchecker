@@ -41,6 +41,7 @@ class RmStoreListTextWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable editable) {
+        storeAdapter.clear();
         task.cancel(true);
         if (editable.length() > 2) {
             rmProgressBar.setVisibility(View.VISIBLE);
