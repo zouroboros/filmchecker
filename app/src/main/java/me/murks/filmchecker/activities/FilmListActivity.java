@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
 
@@ -20,7 +21,7 @@ public class FilmListActivity extends AppCompatActivity {
 
     private FilmCheckerApp app;
     private FilmStatusListAdapter adapter;
-    private View progress;
+    private SwipeRefreshLayout refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,27 +30,31 @@ public class FilmListActivity extends AppCompatActivity {
 
         app = new FilmCheckerApp();
 
-        progress = findViewById(R.id.listProgress);
-        progress.setVisibility(View.INVISIBLE);
-
         adapter = new FilmStatusListAdapter(this);
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
-                progress.setVisibility(View.INVISIBLE);
+                refresh.setRefreshing(false);
             }
         });
 
-        ListView filmList = (ListView) findViewById(R.id.filmList);
+        ListView filmList = findViewById(R.id.filmList);
         filmList.setAdapter(adapter);
 
+        refresh = findViewById(R.id.filmListRefreshLayout);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadList();
+            }
+        });
+
+        refresh.setRefreshing(true);
         loadList();
     }
 
     private void loadList() {
-        adapter.clear();
-        progress.setVisibility(View.VISIBLE);
         app.fillFilmList(this, adapter).execute();
     }
 
@@ -79,6 +84,7 @@ public class FilmListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.update_film_list) {
+            refresh.setRefreshing(true);
             loadList();
             return true;
         }

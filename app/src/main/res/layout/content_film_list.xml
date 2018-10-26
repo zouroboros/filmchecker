@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filmListRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,31 +14,8 @@
     tools:context=".activities.FilmListActivity"
     tools:showIn="@layout/activity_film_list">
 
-    <RelativeLayout
-        android:id="@+id/listProgress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ProgressBar
-            android:id="@+id/listProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:indeterminate="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_below="@id/listProgressBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/film_list_updating_list" />
-
-
-    </RelativeLayout>
-
     <ListView
         android:id="@+id/filmList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
