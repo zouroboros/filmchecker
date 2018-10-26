@@ -17,7 +17,7 @@
     <string name="rossmannUiName">Rossmann (Deutschland)</string>
     <string name="storeZipLabel">PLZ der Filale</string>
     <string name="dmAtUiName">DM (Österreich)</string>
-    <string name="helpMenu">Hilfe</string>
+    <string name="aboutMenu">About</string>
     <string name="muellerAtUiName">Müller (Österreich)</string>
     <string name="customerNumberLabel">Kundennummer</string>
     <string name="errorMessageTitle">Fehler</string>

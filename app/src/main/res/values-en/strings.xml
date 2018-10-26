@@ -13,7 +13,7 @@
     <string name="choose_drugstore">Choose store chain</string>
     <string name="storeZipLabel">Store\'s zip code</string>
     <string name="dmAtUiName">DM (Austria)</string>
-    <string name="helpMenu">Help</string>
+    <string name="aboutMenu">About</string>
     <string name="muellerAtUiName">Müller (Austria)</string>
     <string name="customerNumberLabel">Customer number</string>
     <string name="errorMessageTitle">Error</string>

@@ -1,20 +1,23 @@
 package me.murks.filmchecker.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import me.murks.filmchecker.R;
 
-public class HelpActivity extends Activity {
+/**
+ * Activity to show information about FilmChecker
+ */
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        WebView web = (WebView) findViewById(R.id.helpWebView);
-        web.loadUrl("file:///android_asset/help/help_de.html");
+        WebView web = findViewById(R.id.helpWebView);
+        web.loadUrl("file:///android_asset/about/about.html");
     }
 
 

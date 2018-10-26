@@ -89,8 +89,8 @@ public class FilmListActivity extends AppCompatActivity {
             return true;
         }
 
-        if(id == R.id.help) {
-            Intent intent = new Intent(this, HelpActivity.class);
+        if(id == R.id.about) {
+            Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
 
