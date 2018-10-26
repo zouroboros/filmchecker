@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_add"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:src="@drawable/ic_baseline_add_24px"
         android:onClick="addFilmClicked" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
