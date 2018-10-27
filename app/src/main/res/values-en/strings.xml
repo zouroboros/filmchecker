@@ -3,8 +3,8 @@
     <string name="app_name">FilmChecker</string>
     <string name="title_activity_add_film">Add a new film</string>
     <string name="update_film_list">Update film list</string>
-    <string name="add_film_order_number">Order number</string>
-    <string name="add_film_shop_id">Store number</string>
+    <string name="order_number">Order number</string>
+    <string name="shop_id">Store number</string>
     <string name="film_list_updating_list">Updating films</string>
     <string name="title_activity_add_film_wizard">Add film</string>
     <string name="load_rm_store_progress">Search for stores</string>
@@ -25,4 +25,5 @@
     <string name="action_settings">Settings</string>
     <string name="htn_number">HT-NR.</string>
     <string name="deleteButtonDesc">Delete</string>
+    <string name="film_added_on">Added on</string>
 </resources>

@@ -26,6 +26,7 @@
             android:name=".activities.AddFilmWizardActivity"
             android:label="@string/title_activity_add_film_wizard" />
         <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.FilmActivity"></activity>
     </application>
 
 </manifest>

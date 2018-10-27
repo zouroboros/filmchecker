@@ -20,7 +20,7 @@
             android:id="@+id/orderNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/add_film_order_number"/>
+            android:hint="@string/order_number"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

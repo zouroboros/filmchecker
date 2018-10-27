@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.FilmActivity">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/film_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/film_ordernumber_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/order_number"/>
+
+            <TextView
+                android:id="@+id/film_ordernumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/film_ordernumber_label"
+                tools:text="orderNumber"/>
+
+            <TextView
+                android:id="@+id/film_shopid_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                app:layout_constraintTop_toBottomOf="@id/film_ordernumber"
+                tools:text="ShopId/HtnNumber"/>
+
+            <TextView
+                android:id="@+id/film_shopid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/film_shopid_label"
+                tools:text="ShopId"/>
+
+            <TextView
+                android:id="@+id/film_added_on_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                app:layout_constraintTop_toBottomOf="@+id/film_shopid"
+                android:text="@string/film_added_on"/>
+
+            <TextView
+                android:id="@+id/film_added_on"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/film_added_on_label"
+                tools:text="01.01.2018"/>
+
+            <TextView
+                android:id="@+id/film_status_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                app:layout_constraintTop_toBottomOf="@id/film_added_on"
+                tools:text="Statuscode"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

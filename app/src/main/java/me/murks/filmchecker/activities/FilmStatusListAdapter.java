@@ -1,13 +1,17 @@
 package me.murks.filmchecker.activities;
 
 import androidx.annotation.NonNull;
+
+import android.content.Intent;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
@@ -24,6 +28,7 @@ import me.murks.filmchecker.model.FilmStatus;
 public class FilmStatusListAdapter extends RecyclerView.Adapter<FilmStatusListAdapter.FilmStatusView> {
 
     private List<Pair<Film, FilmStatus>> films;
+    private View.OnClickListener listener;
 
     public FilmStatusListAdapter() {
         super();
@@ -39,7 +44,7 @@ public class FilmStatusListAdapter extends RecyclerView.Adapter<FilmStatusListAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FilmStatusView holder, int position) {
+    public void onBindViewHolder(@NonNull final FilmStatusView holder, int position) {
         Pair<Film, FilmStatus> entry = films.get(position);
         holder.orderNumber.setText(entry.first.getOrderNumber());
 
@@ -54,6 +59,16 @@ public class FilmStatusListAdapter extends RecyclerView.Adapter<FilmStatusListAd
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
         holder.insertDate.setText(String.format(holder.itemView.getResources()
                 .getString(R.string.film_list_insert_date), formattedDate));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Film film = films.get(holder.getAdapterPosition()).first;
+                Intent intent = new Intent(holder.itemView.getContext(), FilmActivity.class);
+                intent.putExtra(FilmActivity.FILM_ID_INTENT_EXTRA, film.getId());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

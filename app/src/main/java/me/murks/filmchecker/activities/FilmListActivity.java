@@ -6,9 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Pair;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.List;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -17,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
+import me.murks.filmchecker.background.ResultListener;
+import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.FilmStatus;
 
 /**
  * Activity for listing all films
@@ -81,17 +87,17 @@ public class FilmListActivity extends AppCompatActivity {
     }
 
     private void loadList() {
-        app.fillFilmList(this, adapter).execute();
+        app.loadFilmStatus(new ResultListener<List<Pair<Film, FilmStatus>>>() {
+            @Override
+            public void onResult(List<Pair<Film, FilmStatus>> result) {
+                adapter.setFilms(result);
+            }
+        }, app.getFilms(this).toArray(new Film[0]));
     }
 
     public void addFilmClicked(View view) {
         Intent intent = new Intent(this, AddFilmWizardActivity.class);
         startActivity(intent);
-    }
-
-    public void deleteFilmClicked(View view) {
-        app.removeFilm(this, app.getFilmById(this, (Long) view.getTag()));
-        loadList();
     }
 
     @Override

@@ -37,7 +37,7 @@ public class DmDeStoreModel implements StoreModel {
 
     @Override
     public int getShopIdFieldName() {
-        return R.string.add_film_shop_id;
+        return R.string.shop_id;
     }
 
     @Override
