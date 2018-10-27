@@ -61,9 +61,27 @@ public class FilmStatusListAdapter extends RecyclerView.Adapter<FilmStatusListAd
         return films.size();
     }
 
+    /**
+     * Sets the films and their status information
+     * @param newFilms The films and status information
+     */
     public void setFilms(List<Pair<Film, FilmStatus>> newFilms) {
         films = newFilms;
         notifyDataSetChanged();
+    }
+
+    /**
+     * Returns the list of films. Changes to this list are not automatically detected! You need to
+     * call the appropriate notify method by yourself!
+     * {@link RecyclerView.Adapter#notifyDataSetChanged()}
+     * {@link RecyclerView.Adapter#notifyItemChanged(int)}
+     * {@link RecyclerView.Adapter#notifyItemInserted(int)}
+     * {@link RecyclerView.Adapter#notifyItemMoved(int, int)}
+     * {@link RecyclerView.Adapter#notifyItemRangeRemoved(int, int)}
+     * @return List of films and their status information
+     */
+    public List<Pair<Film, FilmStatus>> getFilms() {
+        return films;
     }
 
     class FilmStatusView extends RecyclerView.ViewHolder {

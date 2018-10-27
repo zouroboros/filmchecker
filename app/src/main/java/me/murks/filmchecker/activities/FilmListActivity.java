@@ -2,6 +2,8 @@ package me.murks.filmchecker.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -45,6 +48,24 @@ public class FilmListActivity extends AppCompatActivity {
         filmList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         filmList.addItemDecoration(
                 new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        ItemTouchHelper swipeHelper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder,
+                                          @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        app.removeFilm(getApplicationContext(),
+                                adapter.getFilms().get(viewHolder.getAdapterPosition()).first);
+                        adapter.getFilms().remove(viewHolder.getAdapterPosition());
+                        adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                    }
+                });
+        swipeHelper.attachToRecyclerView(filmList);
         filmList.setAdapter(adapter);
 
         refresh = findViewById(R.id.filmListRefreshLayout);
