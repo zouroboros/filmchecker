@@ -1,15 +1,16 @@
 package me.murks.filmchecker.activities;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
@@ -22,16 +23,17 @@ public class FilmListActivity extends AppCompatActivity {
     private FilmCheckerApp app;
     private FilmStatusListAdapter adapter;
     private SwipeRefreshLayout refresh;
+    private RecyclerView filmList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_film_list);
+        setContentView(R.layout.film_list_activity);
 
         app = new FilmCheckerApp();
 
-        adapter = new FilmStatusListAdapter(this);
-        adapter.registerDataSetObserver(new DataSetObserver() {
+        adapter = new FilmStatusListAdapter();
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
@@ -39,7 +41,10 @@ public class FilmListActivity extends AppCompatActivity {
             }
         });
 
-        ListView filmList = findViewById(R.id.filmList);
+        filmList = findViewById(R.id.filmList);
+        filmList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        filmList.addItemDecoration(
+                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         filmList.setAdapter(adapter);
 
         refresh = findViewById(R.id.filmListRefreshLayout);

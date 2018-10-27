@@ -34,9 +34,7 @@ public class AsyncFilmListTask extends AsyncTask<String, Void, List<Pair<Film, F
     @Override
     protected void onPostExecute(List<Pair<Film, FilmStatus>> result) {
         super.onPostExecute(result);
-        adapter.clear();
-        adapter.addAll(result);
-        adapter.notifyDataSetChanged();
+        adapter.setFilms(result);
     }
 
     @Override

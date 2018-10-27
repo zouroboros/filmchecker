@@ -1,61 +1,81 @@
 package me.murks.filmchecker.activities;
 
-import android.content.Context;
 import androidx.annotation.NonNull;
 import android.text.format.DateUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TimeZone;
 
+import androidx.recyclerview.widget.RecyclerView;
 import me.murks.filmchecker.R;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 
 /**
- * ListAdapter for the film list
+ * Adapter for the film list
  * @author zouroboros
  */
-public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> {
+public class FilmStatusListAdapter extends RecyclerView.Adapter<FilmStatusListAdapter.FilmStatusView> {
 
-    public FilmStatusListAdapter(Context context) {
-        super(context, 0, new LinkedList<Pair<Film, FilmStatus>>());
+    private List<Pair<Film, FilmStatus>> films;
+
+    public FilmStatusListAdapter() {
+        super();
+        films = new LinkedList<>();
+    }
+
+    @NonNull
+    @Override
+    public FilmStatusView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.film_list_item, parent, false);
+        return new FilmStatusView(view);
     }
 
     @Override
-    @NonNull
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        Pair<Film, FilmStatus> entry = super.getItem(position);
-        View view = convertView;
-        if(view == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_film_status_list_item, parent, false);
-        }
-        TextView orderNumberView = (TextView)view.findViewById(R.id.orderNumber);
-        orderNumberView.setText(entry.first.getOrderNumber());
+    public void onBindViewHolder(@NonNull FilmStatusView holder, int position) {
+        Pair<Film, FilmStatus> entry = films.get(position);
+        holder.orderNumber.setText(entry.first.getOrderNumber());
 
-        TextView shopIdView = (TextView)view.findViewById(R.id.shopId);
-        shopIdView.setText(entry.first.getShopId());
+        holder.shopId.setText(entry.first.getShopId());
 
-        TextView statuscodeView = (TextView)view.findViewById(R.id.statusCode);
-        statuscodeView.setText(entry.second.getStatus());
-        statuscodeView.setSelected(true);
+        holder.statuscode.setText(entry.second.getStatus());
+        holder.statuscode.setSelected(true);
 
-        TextView insertDateView = (TextView)view.findViewById(R.id.insertDate);
         long when = entry.first.getInsertDate().getTimeInMillis();
         long time = when + TimeZone.getDefault().getOffset(when);
-        String formattedDate = DateUtils.formatDateTime(view.getContext(), time,
+        String formattedDate = DateUtils.formatDateTime(holder.itemView.getContext(), time,
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-        insertDateView.setText(String.format(view.getResources()
+        holder.insertDate.setText(String.format(holder.itemView.getResources()
                 .getString(R.string.film_list_insert_date), formattedDate));
+    }
 
-        View deleteButton = view.findViewById(R.id.delete_button);
-        deleteButton.setTag(entry.first.getId());
+    @Override
+    public int getItemCount() {
+        return films.size();
+    }
 
-        return view;
+    public void setFilms(List<Pair<Film, FilmStatus>> newFilms) {
+        films = newFilms;
+        notifyDataSetChanged();
+    }
+
+    class FilmStatusView extends RecyclerView.ViewHolder {
+
+        public final TextView orderNumber, shopId, statuscode, insertDate;
+
+        public FilmStatusView(@NonNull View itemView) {
+            super(itemView);
+            orderNumber = itemView.findViewById(R.id.orderNumber);
+            shopId = itemView.findViewById(R.id.shopId);
+            statuscode = itemView.findViewById(R.id.statusCode);
+            insertDate = itemView.findViewById(R.id.insertDate);
+        }
     }
 }

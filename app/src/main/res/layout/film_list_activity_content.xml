@@ -8,9 +8,9 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.FilmListActivity"
-    tools:showIn="@layout/activity_film_list">
+    tools:showIn="@layout/film_list_activity">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filmList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

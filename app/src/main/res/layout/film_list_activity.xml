@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.FilmListActivity">
 
-    <include layout="@layout/content_film_list" />
+    <include layout="@layout/film_list_activity_content" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
