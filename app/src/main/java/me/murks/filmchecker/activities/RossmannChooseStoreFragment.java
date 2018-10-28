@@ -51,7 +51,8 @@ public class RossmannChooseStoreFragment extends StoreModelFragment implements E
                 new RmStoreQueryTask(parent, (RmStoreModel) storeModel).execute(link.storeUrl);
             }
         });
-        final ArrayAdapter<RossmannStoreLink> storeAdapter = new ArrayAdapter<>(getContext(), R.layout.rm_store_list_item, R.id.rm_store_list_item_text);
+        final ArrayAdapter<RossmannStoreLink> storeAdapter = new ArrayAdapter<>(getContext(),
+                R.layout.rm_store_list_item, R.id.rm_store_list_item_text);
         storeList.setAdapter(storeAdapter);
         storeAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override

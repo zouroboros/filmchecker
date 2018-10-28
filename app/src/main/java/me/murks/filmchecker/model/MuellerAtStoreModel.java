@@ -44,4 +44,9 @@ public class MuellerAtStoreModel implements StoreModel {
     public String getStoreId() {
         return StoreId;
     }
+
+    @Override
+    public int getStoreUrl() {
+        return R.string.muellerAtTrackingUrl;
+    }
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/statusCode"
@@ -17,9 +18,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/insertDate"
-        android:layout_toLeftOf="@+id/delete_button"
-        android:layout_toStartOf="@+id/delete_button"
-        android:longClickable="true"
+        android:clickable="false"
         tools:text="statusCode"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -30,7 +29,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/statusCode"
-        android:longClickable="true"
+        android:clickable="false"
         tools:text="orderNumber"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -42,33 +41,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         tools:text="(01.01.16)"
+        android:clickable="false"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
+        android:id="@+id/shopId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:longClickable="true"
-        android:id="@+id/shopId"
         tools:text="shopId"
-        android:layout_alignBottom="@+id/orderNumber"
+        android:clickable="false"
+        android:layout_alignBaseline="@+id/orderNumber"
         android:layout_toRightOf="@+id/orderNumber"
         android:layout_toEndOf="@+id/orderNumber"
         android:layout_marginLeft="@dimen/insertDateLeftMargin"
         android:layout_marginStart="@dimen/insertDateLeftMargin"/>
-
-    <ImageButton
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/shopId"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="?android:selectableItemBackground"
-        android:src="@drawable/ic_delete_forever_black_24dp"
-        android:onClick="deleteFilmClicked"
-        android:contentDescription="@string/deleteButtonDesc"/>
-
-
 </RelativeLayout>

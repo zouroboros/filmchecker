@@ -1,19 +1,20 @@
 package me.murks.filmchecker;
 
 import android.content.Context;
+import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
-import me.murks.filmchecker.activities.FilmStatusListAdapter;
-import me.murks.filmchecker.background.AsyncFilmListTask;
+import me.murks.filmchecker.background.FilmStatusTask;
+import me.murks.filmchecker.background.ResultListener;
 import me.murks.filmchecker.io.FilmDb;
 import me.murks.filmchecker.io.StatusProviderFactory;
 import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.FilmStatus;
 import me.murks.filmchecker.model.MuellerAtStoreModel;
 import me.murks.filmchecker.model.MuellerDeStoreModel;
 import me.murks.filmchecker.model.RmStoreModel;
@@ -27,14 +28,10 @@ import me.murks.filmchecker.model.StoreModel;
 public class FilmCheckerApp {
     /**
      * Fills the given {@see FilmStatusListAdapter} and populates it with {@see Film}s and there order status
-     * @param context The context from which this method is called
-     * @param adapter The adapter to fill
-     * @return An {@see AsyncFilmListTask} object
+     * @param listener The listener for the results
      */
-    public AsyncFilmListTask fillFilmList(Context context, FilmStatusListAdapter adapter) {
-        FilmDb db = new FilmDb(context);
-        Collection<Film> films = db.getFilms();
-        return new AsyncFilmListTask(adapter, films, getStatusProvider());
+    public void loadFilmStatus(ResultListener<List<Pair<Film, FilmStatus>>> listener, Film... films) {
+        new FilmStatusTask(listener, getStatusProvider()).execute(films);
     }
 
     /**
@@ -42,7 +39,7 @@ public class FilmCheckerApp {
      * @param context Current context
      * @return A {@see List} of {@link Film}s
      */
-    private List<Film> getFilms(Context context) {
+    public List<Film> getFilms(Context context) {
         FilmDb db = new FilmDb(context);
         return new ArrayList<>(db.getFilms());
     }
@@ -95,5 +92,21 @@ public class FilmCheckerApp {
         return Arrays.asList(new DmDeStoreModel(), new DmAtStoreModel(),
                 new RmStoreModel(), new MuellerAtStoreModel(),
                 new MuellerDeStoreModel());
+    }
+
+    /**
+     * Returns the {@link StoreModel} for a film
+     * @param film The film whose store model is returned
+     * @return The StoreModel
+     * @throws IllegalArgumentException If no store is found for the film
+     */
+    public StoreModel getStoreModelForFilm(Film film) {
+        for (StoreModel model: getStores()) {
+            if (model.getStoreId().equals(film.getStoreId())) {
+                return model;
+            }
+        }
+        throw new IllegalArgumentException("No store found for store id:" + film.getStoreId()
+                + " of film:" + film.toString());
     }
 }

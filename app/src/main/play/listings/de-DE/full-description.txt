@@ -1,0 +1,1 @@
+Auftragsverfolgung für Filmentwicklungsaufträge. Es werden die Dropgerien Rossmann (in Deutschland), DM (Deutschland und Österreich) und Müller (Deutschland und Österreich) unterstützt.
