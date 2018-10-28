@@ -1,0 +1,1 @@
+Checks the status of photographic film development orders. Currently the drug shops Rossmann (only in Germany), DM (Germany and Austria) and Müller (Germany and Austria) are supported.
