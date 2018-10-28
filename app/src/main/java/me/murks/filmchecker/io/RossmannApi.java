@@ -18,7 +18,7 @@ import me.murks.filmchecker.model.RmQueryModel;
 import me.murks.filmchecker.model.RossmannStoreLink;
 
 /**
- * Class for interactin with the rossmann website
+ * Class for interacting with the rossmann website
  * @author zouroboros
  * @version 9/11/17
  */

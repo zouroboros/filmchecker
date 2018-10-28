@@ -1,61 +1,114 @@
 package me.murks.filmchecker.activities;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+
+import android.content.Intent;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.time.Instant;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TimeZone;
 
+import androidx.recyclerview.widget.RecyclerView;
 import me.murks.filmchecker.R;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 
 /**
- * ListAdapter for the film list
+ * Adapter for the film list
  * @author zouroboros
  */
-public class FilmStatusListAdapter extends ArrayAdapter<Pair<Film, FilmStatus>> {
+public class FilmStatusListAdapter extends RecyclerView.Adapter<FilmStatusListAdapter.FilmStatusView> {
 
-    public FilmStatusListAdapter(Context context) {
-        super(context, 0, new LinkedList<Pair<Film, FilmStatus>>());
+    private List<Pair<Film, FilmStatus>> films;
+    private View.OnClickListener listener;
+
+    public FilmStatusListAdapter() {
+        super();
+        films = new LinkedList<>();
+    }
+
+    @NonNull
+    @Override
+    public FilmStatusView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.film_list_item, parent, false);
+        return new FilmStatusView(view);
     }
 
     @Override
-    @NonNull
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        Pair<Film, FilmStatus> entry = super.getItem(position);
-        View view = convertView;
-        if(view == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_film_status_list_item, parent, false);
-        }
-        TextView orderNumberView = (TextView)view.findViewById(R.id.orderNumber);
-        orderNumberView.setText(entry.first.getOrderNumber());
+    public void onBindViewHolder(@NonNull final FilmStatusView holder, int position) {
+        Pair<Film, FilmStatus> entry = films.get(position);
+        holder.orderNumber.setText(entry.first.getOrderNumber());
 
-        TextView shopIdView = (TextView)view.findViewById(R.id.shopId);
-        shopIdView.setText(entry.first.getShopId());
+        holder.shopId.setText(entry.first.getShopId());
 
-        TextView statuscodeView = (TextView)view.findViewById(R.id.statusCode);
-        statuscodeView.setText(entry.second.getStatus());
-        statuscodeView.setSelected(true);
+        holder.statuscode.setText(entry.second.getStatus());
+        holder.statuscode.setSelected(true);
 
-        TextView insertDateView = (TextView)view.findViewById(R.id.insertDate);
         long when = entry.first.getInsertDate().getTimeInMillis();
         long time = when + TimeZone.getDefault().getOffset(when);
-        String formattedDate = DateUtils.formatDateTime(view.getContext(), time,
+        String formattedDate = DateUtils.formatDateTime(holder.itemView.getContext(), time,
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-        insertDateView.setText(String.format(view.getResources()
+        holder.insertDate.setText(String.format(holder.itemView.getResources()
                 .getString(R.string.film_list_insert_date), formattedDate));
 
-        View deleteButton = view.findViewById(R.id.delete_button);
-        deleteButton.setTag(entry.first.getId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Film film = films.get(holder.getAdapterPosition()).first;
+                Intent intent = new Intent(holder.itemView.getContext(), FilmActivity.class);
+                intent.putExtra(FilmActivity.FILM_ID_INTENT_EXTRA, film.getId());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+    }
 
-        return view;
+    @Override
+    public int getItemCount() {
+        return films.size();
+    }
+
+    /**
+     * Sets the films and their status information
+     * @param newFilms The films and status information
+     */
+    public void setFilms(List<Pair<Film, FilmStatus>> newFilms) {
+        films = newFilms;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Returns the list of films. Changes to this list are not automatically detected! You need to
+     * call the appropriate notify method by yourself!
+     * {@link RecyclerView.Adapter#notifyDataSetChanged()}
+     * {@link RecyclerView.Adapter#notifyItemChanged(int)}
+     * {@link RecyclerView.Adapter#notifyItemInserted(int)}
+     * {@link RecyclerView.Adapter#notifyItemMoved(int, int)}
+     * {@link RecyclerView.Adapter#notifyItemRangeRemoved(int, int)}
+     * @return List of films and their status information
+     */
+    public List<Pair<Film, FilmStatus>> getFilms() {
+        return films;
+    }
+
+    class FilmStatusView extends RecyclerView.ViewHolder {
+
+        public final TextView orderNumber, shopId, statuscode, insertDate;
+
+        public FilmStatusView(@NonNull View itemView) {
+            super(itemView);
+            orderNumber = itemView.findViewById(R.id.orderNumber);
+            shopId = itemView.findViewById(R.id.shopId);
+            statuscode = itemView.findViewById(R.id.statusCode);
+            insertDate = itemView.findViewById(R.id.insertDate);
+        }
     }
 }

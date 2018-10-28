@@ -44,4 +44,9 @@ public class MuellerDeStoreModel implements StoreModel {
     public String getStoreId() {
         return StoreId;
     }
+
+    @Override
+    public int getStoreUrl() {
+        return R.string.muellerDeTrackingUrl;
+    }
 }

@@ -14,7 +14,7 @@ public class Film {
     private final String orderNumber;
     private final String shopId;
     private final Calendar insertDate;
-    private final String statusProvider;
+    private final String storeId;
     private final URL rmEndpoint;
     private final String htNumber;
 
@@ -23,16 +23,17 @@ public class Film {
      * @param orderNumber The order number
      * @param shopId The shop id
      * @param insertDate The date the film was entered into the application
-     * @param statusProvider The id of the status provider for this film
+     * @param storeId The id of the store for this film
      * @param rmEndpoint URL of the rm endpoint to query for this order
      * @param htNumber The htNumber of the store
      *
      */
-    public Film(String orderNumber, String shopId, Calendar insertDate, String statusProvider, URL rmEndpoint, String htNumber) {
+    public Film(String orderNumber, String shopId, Calendar insertDate, String storeId,
+                URL rmEndpoint, String htNumber) {
         this.orderNumber = orderNumber;
         this.shopId = shopId;
         this.insertDate = insertDate;
-        this.statusProvider = statusProvider;
+        this.storeId = storeId;
         this.rmEndpoint = rmEndpoint;
         this.htNumber = htNumber;
         this.id = null;
@@ -44,16 +45,17 @@ public class Film {
      * @param orderNumber The order number
      * @param shopId The shop id
      * @param insertDate The date the film was entered into the application
-     * @param statusProvider The id of the status provider for this film
+     * @param storeId The id of the status provider for this film
      * @param rmEndpoint URL of the rm endpoint to query for this order
      * @param htNumber The htNumber of the store
      *
      */
-    public Film(long id, String orderNumber, String shopId, Calendar insertDate, String statusProvider, URL rmEndpoint, String htNumber) {
+    public Film(long id, String orderNumber, String shopId, Calendar insertDate,
+                String storeId, URL rmEndpoint, String htNumber) {
         this.orderNumber = orderNumber;
         this.shopId = shopId;
         this.insertDate = insertDate;
-        this.statusProvider = statusProvider;
+        this.storeId = storeId;
         this.rmEndpoint = rmEndpoint;
         this.htNumber = htNumber;
         this.id = id;
@@ -87,8 +89,8 @@ public class Film {
      * Returns the id of the status provider for this film
      * @return The id of the status provider
      */
-    public String getStatusProvider() {
-        return this.statusProvider;
+    public String getStoreId() {
+        return this.storeId;
     }
 
     /**

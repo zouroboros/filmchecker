@@ -1,17 +1,28 @@
 package me.murks.filmchecker.activities;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Pair;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
+import java.util.List;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import me.murks.filmchecker.FilmCheckerApp;
 import me.murks.filmchecker.R;
+import me.murks.filmchecker.background.ResultListener;
+import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.FilmStatus;
 
 /**
  * Activity for listing all films
@@ -20,47 +31,73 @@ public class FilmListActivity extends AppCompatActivity {
 
     private FilmCheckerApp app;
     private FilmStatusListAdapter adapter;
-    private View progress;
+    private SwipeRefreshLayout refresh;
+    private RecyclerView filmList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_film_list);
+        setContentView(R.layout.film_list_activity);
 
         app = new FilmCheckerApp();
 
-        progress = findViewById(R.id.listProgress);
-        progress.setVisibility(View.INVISIBLE);
-
-        adapter = new FilmStatusListAdapter(this);
-        adapter.registerDataSetObserver(new DataSetObserver() {
+        adapter = new FilmStatusListAdapter();
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
-                progress.setVisibility(View.INVISIBLE);
+                refresh.setRefreshing(false);
             }
         });
 
-        ListView filmList = (ListView) findViewById(R.id.filmList);
+        filmList = findViewById(R.id.filmList);
+        filmList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        filmList.addItemDecoration(
+                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        ItemTouchHelper swipeHelper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder,
+                                          @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        app.removeFilm(getApplicationContext(),
+                                adapter.getFilms().get(viewHolder.getAdapterPosition()).first);
+                        adapter.getFilms().remove(viewHolder.getAdapterPosition());
+                        adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                    }
+                });
+        swipeHelper.attachToRecyclerView(filmList);
         filmList.setAdapter(adapter);
 
+        refresh = findViewById(R.id.filmListRefreshLayout);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadList();
+            }
+        });
+
+        refresh.setRefreshing(true);
         loadList();
     }
 
     private void loadList() {
-        adapter.clear();
-        progress.setVisibility(View.VISIBLE);
-        app.fillFilmList(this, adapter).execute();
+        app.loadFilmStatus(new ResultListener<List<Pair<Film, FilmStatus>>>() {
+            @Override
+            public void onResult(List<Pair<Film, FilmStatus>> result) {
+                adapter.setFilms(result);
+            }
+        }, app.getFilms(this).toArray(new Film[0]));
     }
 
     public void addFilmClicked(View view) {
         Intent intent = new Intent(this, AddFilmWizardActivity.class);
         startActivity(intent);
-    }
-
-    public void deleteFilmClicked(View view) {
-        app.removeFilm(this, app.getFilmById(this, (Long) view.getTag()));
-        loadList();
     }
 
     @Override
@@ -79,12 +116,13 @@ public class FilmListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.update_film_list) {
+            refresh.setRefreshing(true);
             loadList();
             return true;
         }
 
-        if(id == R.id.help) {
-            Intent intent = new Intent(this, HelpActivity.class);
+        if(id == R.id.about) {
+            Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
 

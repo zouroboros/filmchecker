@@ -54,4 +54,10 @@ public interface StoreModel {
      * @return Unique id
      */
     String getStoreId();
+
+    /**
+     * Returns the id of string resource that contains a url to open the store's tracking page.
+     * @return The id or string resource
+     */
+    int getStoreUrl();
 }
