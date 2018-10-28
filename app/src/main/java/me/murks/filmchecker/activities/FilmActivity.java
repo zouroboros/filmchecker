@@ -12,6 +12,7 @@ import me.murks.filmchecker.model.StoreModel;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Pair;
 import android.view.View;
@@ -92,7 +93,7 @@ public class FilmActivity extends AppCompatActivity {
 
         long when = film.getInsertDate().getTimeInMillis();
         long time = when + TimeZone.getDefault().getOffset(when);
-        String formattedDate = DateUtils.formatDateTime(this, time, DateUtils.FORMAT_SHOW_DATE);
+        String formattedDate = DateFormat.getDateFormat(this).format(time);
         addedOn.setText(formattedDate);
 
         statusCode.setText(status.getStatus());
