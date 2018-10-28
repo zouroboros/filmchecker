@@ -101,7 +101,7 @@ public class FilmDb extends SQLiteOpenHelper {
         values.put(ORDER_NUMBER_COLUMN, film.getOrderNumber());
         values.put(SHOP_ID_COLUMN, film.getShopId());
         values.put(INSERT_DATE_COLUMN, film.getInsertDate().getTimeInMillis());
-        values.put(PROVIDER_COLUMN, film.getStatusProvider());
+        values.put(PROVIDER_COLUMN, film.getStoreId());
         values.put(RM_ENDPOINT_COLUMN, film.getRmEndpoint() != null ? film.getRmEndpoint().toString() : null);
         values.put(HT_NUMBER_COLUMN, film.getHtNumber());
         db.insert(FILM_TABLE, null, values);

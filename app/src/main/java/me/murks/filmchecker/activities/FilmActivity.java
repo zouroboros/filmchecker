@@ -7,9 +7,9 @@ import me.murks.filmchecker.R;
 import me.murks.filmchecker.background.ResultListener;
 import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
+import me.murks.filmchecker.model.StoreModel;
 
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Pair;
 import android.widget.TextView;
@@ -21,7 +21,7 @@ public class FilmActivity extends AppCompatActivity {
 
     public static final String FILM_ID_INTENT_EXTRA = "filmId";
 
-    private TextView orderNumber, shopIdLabel, shopId, addedOn, statusCode;
+    private TextView shopName, orderNumber, shopIdLabel, shopId, addedOn, statusCode;
     private SwipeRefreshLayout refresh;
     private FilmCheckerApp app;
     private Film film;
@@ -36,6 +36,7 @@ public class FilmActivity extends AppCompatActivity {
         long filmId = getIntent().getExtras().getLong(FILM_ID_INTENT_EXTRA);
         film = app.getFilmById(this, filmId);
 
+        shopName = findViewById(R.id.film_shop_name);
         orderNumber = findViewById(R.id.film_ordernumber);
         shopIdLabel = findViewById(R.id.film_shopid_label);
         shopId = findViewById(R.id.film_shopid);
@@ -68,6 +69,10 @@ public class FilmActivity extends AppCompatActivity {
     }
 
     private void bindFilm(Film film, FilmStatus status) {
+        StoreModel model = app.getStoreModelForFilm(film);
+
+        shopName.setText(model.getStoreName());
+
         orderNumber.setText(film.getOrderNumber());
 
         if(film.getHtNumber() != null) {

@@ -38,7 +38,7 @@ public class FilmStatusTask extends AsyncTask<Film, Void, List<Pair<Film, FilmSt
         for (Film f: films) {
             try {
                 FilmStatus status = statusProviderFactory
-                        .getStatusProviderById(f.getStatusProvider()).getFilmStatus(f);
+                        .getStatusProviderById(f.getStoreId()).getFilmStatus(f);
                 results.add(new Pair<>(f, status));
             } catch (IOException ioe) {
                 results.add(new Pair<>(f, new FilmStatus(ioe.getLocalizedMessage(), new Date())));

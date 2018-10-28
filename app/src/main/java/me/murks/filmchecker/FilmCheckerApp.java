@@ -93,4 +93,20 @@ public class FilmCheckerApp {
                 new RmStoreModel(), new MuellerAtStoreModel(),
                 new MuellerDeStoreModel());
     }
+
+    /**
+     * Returns the {@link StoreModel} for a film
+     * @param film The film whose store model is returned
+     * @return The StoreModel
+     * @throws IllegalArgumentException If no store is found for the film
+     */
+    public StoreModel getStoreModelForFilm(Film film) {
+        for (StoreModel model: getStores()) {
+            if (model.getStoreId().equals(film.getStoreId())) {
+                return model;
+            }
+        }
+        throw new IllegalArgumentException("No store found for store id:" + film.getStoreId()
+                + " of film:" + film.toString());
+    }
 }
