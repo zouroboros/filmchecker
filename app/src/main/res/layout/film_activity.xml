@@ -77,6 +77,14 @@
                 app:layout_constraintTop_toBottomOf="@id/film_added_on"
                 tools:text="Statuscode"/>
 
+            <Button
+                android:id="@+id/filmOpenStoreTrackingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Store's tracking page"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

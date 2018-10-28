@@ -30,4 +30,5 @@
     <string name="muellerAtTrackingUrl">https://mfoto.mueller-drogerie.at/auftragsauskunft.html</string>
     <string name="muellerDeTrackingUrl">https://m.foto.mueller.de/auftragsauskunft.html</string>
     <string name="rossmannDeTrackingUrl">http://www.rossmann-fotowelt.de/auftragstasche-foto-station/</string>
+    <string name="openStoreTrackingButtonText">%s Auftragsverfolgung öffnen</string>
 </resources>

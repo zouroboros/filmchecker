@@ -9,9 +9,13 @@ import me.murks.filmchecker.model.Film;
 import me.murks.filmchecker.model.FilmStatus;
 import me.murks.filmchecker.model.StoreModel;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Pair;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,6 +27,7 @@ public class FilmActivity extends AppCompatActivity {
 
     private TextView shopName, orderNumber, shopIdLabel, shopId, addedOn, statusCode;
     private SwipeRefreshLayout refresh;
+    private Button openStoreTrackingButton;
     private FilmCheckerApp app;
     private Film film;
 
@@ -51,6 +56,8 @@ public class FilmActivity extends AppCompatActivity {
             }
         });
 
+        openStoreTrackingButton = findViewById(R.id.filmOpenStoreTrackingButton);
+
         refresh.setRefreshing(true);
         loadFilm();
     }
@@ -69,7 +76,7 @@ public class FilmActivity extends AppCompatActivity {
     }
 
     private void bindFilm(Film film, FilmStatus status) {
-        StoreModel model = app.getStoreModelForFilm(film);
+        final StoreModel model = app.getStoreModelForFilm(film);
 
         shopName.setText(model.getStoreName());
 
@@ -89,5 +96,17 @@ public class FilmActivity extends AppCompatActivity {
         addedOn.setText(formattedDate);
 
         statusCode.setText(status.getStatus());
+
+        String storeName = getResources().getString(model.getStoreName());
+        String trackingButtonText = getResources().getString(R.string.openStoreTrackingButtonText);
+        openStoreTrackingButton.setText(String.format(trackingButtonText, storeName));
+        openStoreTrackingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getResources().getString(model.getStoreUrl())));
+                startActivity(intent);
+            }
+        });
     }
 }
