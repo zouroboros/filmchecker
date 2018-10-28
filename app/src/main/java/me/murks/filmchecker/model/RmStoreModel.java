@@ -8,6 +8,7 @@ import java.util.Set;
 import me.murks.filmchecker.R;
 
 /**
+ * StoreModel for Rossmann stores in germany
  * @author zouroboros
  */
 
@@ -54,5 +55,10 @@ public class RmStoreModel implements StoreModel {
     @Override
     public String getStoreId() {
         return StoreId;
+    }
+
+    @Override
+    public int getStoreUrl() {
+        return R.string.rossmannDeTrackingUrl;
     }
 }

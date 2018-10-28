@@ -25,4 +25,9 @@
     <string name="muellerDeUiName">Müller (Deutschland)</string>
     <string name="deleteButtonDesc">Löschen</string>
     <string name="film_added_on">Hinzugefügt am</string>
+    <string name="dmAtTrackingUrl">https://cewe.dm-paradiesfoto.at/auftragsauskunft.html</string>
+    <string name="dmDeTrackingUrl">https://www.fotoparadies.de/service/auftragsstatus.html</string>
+    <string name="muellerAtTrackingUrl">https://mfoto.mueller-drogerie.at/auftragsauskunft.html</string>
+    <string name="muellerDeTrackingUrl">https://m.foto.mueller.de/auftragsauskunft.html</string>
+    <string name="rossmannDeTrackingUrl">http://www.rossmann-fotowelt.de/auftragstasche-foto-station/</string>
 </resources>
