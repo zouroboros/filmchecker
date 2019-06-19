@@ -11,6 +11,7 @@ import me.murks.filmchecker.background.FilmStatusTask;
 import me.murks.filmchecker.background.ResultListener;
 import me.murks.filmchecker.io.FilmDb;
 import me.murks.filmchecker.io.StatusProviderFactory;
+import me.murks.filmchecker.model.BipaAtStoreModel;
 import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.Film;
@@ -91,7 +92,7 @@ public class FilmCheckerApp {
     public List<StoreModel> getStores() {
         return Arrays.asList(new DmDeStoreModel(), new DmAtStoreModel(),
                 new RmStoreModel(), new MuellerAtStoreModel(),
-                new MuellerDeStoreModel());
+                new MuellerDeStoreModel(), new BipaAtStoreModel());
     }
 
     /**
