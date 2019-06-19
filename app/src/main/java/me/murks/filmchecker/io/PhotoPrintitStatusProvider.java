@@ -23,7 +23,7 @@ import me.murks.filmchecker.model.FilmStatus;
  * Implementation of the {@link IStatusProvider} interface for Müller stores
  * @author zouroboros
  */
-public class MuellerStatusProvider implements IStatusProvider {
+public class PhotoPrintitStatusProvider implements IStatusProvider {
     /**
      * The url to query for film info
      */
@@ -54,9 +54,9 @@ public class MuellerStatusProvider implements IStatusProvider {
      */
     private final String config;
     /**
-     * Creates a new MuellerStatusProvider
+     * Creates a new PhotoPrintitStatusProvider
      */
-    MuellerStatusProvider(String configId) {
+    PhotoPrintitStatusProvider(String configId) {
         url = "https://spot.photoprintit.com/spotapi/orderInfo/order";
         config = configId;
     }
