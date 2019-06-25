@@ -25,7 +25,7 @@ class RossmannStatusProvider implements IStatusProvider {
      * @throws IOException When an exception occurs while querying
      */
     public FilmStatus getFilmStatus(Film film) throws IOException {
-        URL url = new URL("http://tracking.orwonet.de/tracking/orderdetails.jsp");
+        URL url = new URL("https://shop.rossmann-fotowelt.de/tracking/orderdetails.jsp");
         if(film.getRmEndpoint() != null) {
             url = film.getRmEndpoint();
         }
