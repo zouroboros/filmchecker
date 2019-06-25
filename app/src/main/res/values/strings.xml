@@ -17,7 +17,7 @@
     <string name="muellerAtUiName">Müller (Austria)</string>
     <string name="customerNumberLabel">Customer number</string>
     <string name="errorMessageTitle">Error</string>
-    <string name="generalErrorMessage">A error has occurred. Please make sure that you have an internet connection. Retry?</string>
+    <string name="generalErrorMessage">A error has occurred. Please make sure that you have an active internet connection. Retry?</string>
     <string name="rossmannUiName">Rossmann (Germany)</string>
     <string name="dmUiName">DM (Germany)</string>
     <string name="muellerDeUiName">Müller (Germany)</string>

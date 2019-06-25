@@ -71,7 +71,7 @@ public class RossmannChooseStoreFragment extends StoreModelFragment implements E
     public void errorOccurred() {
         new AlertDialog.Builder(getActivity()).setMessage(R.string.generalErrorMessage)
                 .setTitle(R.string.errorMessageTitle)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         plzInputTextWatcher.afterTextChanged(plzInput.getEditableText());
