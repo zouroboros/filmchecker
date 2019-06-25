@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -31,7 +32,9 @@ public class RmLoadStoresTask extends AsyncTask<String, Void, List<RossmannStore
         try {
            return new RossmannApi().queryStores(strings[0]);
         } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+            if (!(e instanceof InterruptedIOException)) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
