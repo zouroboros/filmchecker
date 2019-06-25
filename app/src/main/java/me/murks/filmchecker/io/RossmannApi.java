@@ -29,7 +29,7 @@ public class RossmannApi {
 
     public RossmannApi() {
         try {
-            storesEndpoint = new URL("https://tracking.orwonet.de/tracking/outlet.jsp");
+            storesEndpoint = new URL("https://shop.rossmann-fotowelt.de/tracking/outlet.jsp");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
