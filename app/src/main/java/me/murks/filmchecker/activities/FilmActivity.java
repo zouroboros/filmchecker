@@ -87,7 +87,7 @@ public class FilmActivity extends AppCompatActivity {
             shopIdLabel.setText(R.string.htn_number);
             shopId.setText(film.getHtNumber());
         } else {
-            shopIdLabel.setText(R.string.shop_id);
+            shopIdLabel.setText(getString(model.getShopIdFieldName()));
             shopId.setText(film.getShopId());
         }
 
