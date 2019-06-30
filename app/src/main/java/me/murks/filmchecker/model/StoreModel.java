@@ -60,4 +60,12 @@ public interface StoreModel {
      * @return The id or string resource
      */
     int getStoreUrl();
+
+    /**
+     * Returns a string that can be used to identify a film e.g. on a website of a store.
+     * If it is not possible to generate such a string null must be returned.
+     * @param film The film for which the string is generated
+     * @return String containing all tracking information or null
+     */
+    String getTrackingString(Film film);
 }

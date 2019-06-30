@@ -49,4 +49,9 @@ public class DmDeStoreModel implements StoreModel {
     public int getStoreUrl() {
         return R.string.dmDeTrackingUrl;
     }
+
+    @Override
+    public String getTrackingString(Film film) {
+        return String.format("%s-%s", film.getShopId(), film.getOrderNumber());
+    }
 }
