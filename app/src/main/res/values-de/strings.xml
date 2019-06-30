@@ -33,4 +33,6 @@
     <string name="openStoreTrackingButtonText">%s Auftragsverfolgung öffnen</string>
     <string name="bipaAtUiName">BIPA (Österreich)</string>
     <string name="bipaAtTrackingUrl">https://fotoshop.bipa.at/auftragsauskunft.html</string>
+    <string name="trackingStringPasteLabel">%s Auftragsnummer</string>
+    <string name="trackingStringPasteToast">Auftragsnummer kopiert</string>
 </resources>
