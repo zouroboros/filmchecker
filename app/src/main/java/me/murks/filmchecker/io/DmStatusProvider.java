@@ -63,9 +63,9 @@ class DmStatusProvider implements IStatusProvider {
             String jsonString = CharStreams.toString(
                     new InputStreamReader(connection.getInputStream(), "UTF-8" ) );
             JSONObject jsonObject = new JSONObject(jsonString);
-            DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.GERMAN);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN);
             return new FilmStatus(jsonObject.getString(SUMMARY_KEY),
-                    format.parse(jsonObject.getString(SUMMARY_DATE_KEY)));
+                    format.parse(jsonObject.getString(SUMMARY_DATE_KEY)),  null);
 
         } catch(JSONException e) {
             throw new IOException(e);

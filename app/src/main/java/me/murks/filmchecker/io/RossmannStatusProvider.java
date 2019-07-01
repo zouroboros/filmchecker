@@ -41,7 +41,7 @@ class RossmannStatusProvider implements IStatusProvider {
 
             if(match.find()) {
                 String status = match.group(1);
-                return new FilmStatus(status.trim(), null);
+                return new FilmStatus(status.trim(), null, null);
             }
 
             throw new IOException();
@@ -53,7 +53,7 @@ class RossmannStatusProvider implements IStatusProvider {
             String response = HttpHelper.post(url, params);
             Document dom = Jsoup.parse(response);
             return new FilmStatus(dom.select(".trackingContBox div[align='center']").text(),
-                    null);
+                    null, null);
         }
     }
 }
