@@ -49,4 +49,9 @@ public class MuellerDeStoreModel implements StoreModel {
     public int getStoreUrl() {
         return R.string.muellerDeTrackingUrl;
     }
+
+    @Override
+    public String getTrackingString(Film film) {
+        return String.format("%s-%s", film.getShopId(), film.getOrderNumber());
+    }
 }

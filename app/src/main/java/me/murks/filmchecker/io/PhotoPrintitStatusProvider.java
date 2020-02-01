@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import me.murks.filmchecker.model.Film;
+import me.murks.filmchecker.model.FilmOrderState;
 import me.murks.filmchecker.model.FilmStatus;
 
 /**
@@ -48,6 +49,14 @@ public class PhotoPrintitStatusProvider implements IStatusProvider {
      * Json field that suborders objects that contains the state text
      */
     private static final String SUBORDER_STATE_KEY = "stateText";
+    /**
+     * Json field for state code
+     */
+    private static final String SUMMARY_STATE_CODE_KEY = "summaryStateCode";
+    /**
+     * Json field for suborder state code
+     */
+    private static final String SUBORDER_STATE_CODE_KEY = "stateCode";
 
     /**
      * Value for config parameter used for requesting the film details
@@ -70,31 +79,45 @@ public class PhotoPrintitStatusProvider implements IStatusProvider {
             String jsonString = CharStreams.toString(
                     new InputStreamReader( connection.getInputStream(), "UTF-8" ));
             JSONObject jsonObject = new JSONObject(jsonString);
-            DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.GERMAN);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN);
 
             if(jsonObject.has(SUBORDERS_KEY) &&
                     jsonObject.getJSONArray(SUBORDERS_KEY).length() > 0) {
                 JSONArray subOrders = jsonObject.getJSONArray(SUBORDERS_KEY);
                 Date stateDate = format.parse(jsonObject.getString(SUMMARY_DATE_KEY));
-                String state = jsonObject.getString(SUMMARY_KEY);
+                String stateText = jsonObject.getString(SUMMARY_KEY);
+                FilmOrderState state = orderState(jsonObject.getString(SUMMARY_STATE_CODE_KEY));
+
+                // get latest suborder date
                 for(int i = 0; i < subOrders.length(); i++) {
                     JSONObject subOrder = subOrders.getJSONObject(i);
                     Date subOrderDate = format.parse(subOrder.getString(SUBORDER_DATE_KEY));
                     if(subOrderDate.after(stateDate)) {
                         stateDate = subOrderDate;
-                        state = subOrder.getString(SUBORDER_STATE_KEY);
+                        stateText = subOrder.getString(SUBORDER_STATE_KEY);
+                        state = orderState(jsonObject.getString(SUBORDER_STATE_CODE_KEY));
                     }
                 }
-                return new FilmStatus(state, stateDate);
+                return new FilmStatus(stateText, stateDate, state);
             }
             else {
                 return new FilmStatus(jsonObject.getString(SUMMARY_KEY),
-                        format.parse(jsonObject.getString(SUMMARY_DATE_KEY)));
+                        format.parse(jsonObject.getString(SUMMARY_DATE_KEY)),
+                        orderState(jsonObject.getString(SUMMARY_STATE_CODE_KEY)));
             }
         } catch(JSONException e) {
             throw new IOException(e);
         } catch (ParseException e) {
             throw new IOException(e);
         }
+    }
+
+    private FilmOrderState orderState(String state) {
+        if(state.equals("PROCESSING")) {
+            return FilmOrderState.PROCESSING;
+        } else if(state.equals("SHIPPED")) {
+            return FilmOrderState.DONE;
+        }
+        return FilmOrderState.UNKNOWN;
     }
 }

@@ -13,16 +13,26 @@ public class FilmStatus {
      */
     private final String status;
 
+    /**
+     * Date when the status was last updated
+     */
     private final Date date;
+
+    /**
+     * State of this film order
+     */
+    private final FilmOrderState state;
 
     /**
      * Constructs a new FilmStatus with the given status
      * @param newStatus The status
-     * @param newDate The date of status
+     * @param newDate The date of status (can be null)
+     * @param newState The state of the film order (can be null)
      */
-    public FilmStatus(String newStatus, Date newDate) {
+    public FilmStatus(String newStatus, Date newDate, FilmOrderState newState) {
         status = newStatus;
         date = newDate;
+        state = newState;
     }
 
     /**
@@ -34,8 +44,14 @@ public class FilmStatus {
     }
 
     /**
-     * Returns the date for the status
+     * Returns the date for the status (null if no date is provided)
      * @return Status date
      */
     public Date getDate() { return date; }
+
+    /**
+     * The state of the film order (null if no state is provided)
+     * @return Order state
+     */
+    public FilmOrderState getState() { return state; }
 }

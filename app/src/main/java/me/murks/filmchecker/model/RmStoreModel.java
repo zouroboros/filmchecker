@@ -61,4 +61,9 @@ public class RmStoreModel implements StoreModel {
     public int getStoreUrl() {
         return R.string.rossmannDeTrackingUrl;
     }
+
+    @Override
+    public String getTrackingString(Film film) {
+        return null;
+    }
 }
