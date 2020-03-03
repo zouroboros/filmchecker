@@ -18,7 +18,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/orderNumber"
-            android:inputType="number|text"
+            android:inputType="textVisiblePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/order_number"/>
@@ -33,7 +33,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/shopId"
-            android:inputType="number|text"
+            android:inputType="textVisiblePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -47,7 +47,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/htnNumber"
-            android:inputType="number|text"
+            android:inputType="textVisiblePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/htn_number"/>
