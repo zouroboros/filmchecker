@@ -13,6 +13,7 @@
     <string name="htn_number">HT-NR.</string>
     <string name="save_film">Film speichern</string>
     <string name="dmUiName">DM (Deutschland)</string>
+    <string name="ceweUiName">Cewe</string>
     <string name="choose_drugstore">Kette auswählen</string>
     <string name="rossmannUiName">Rossmann (Deutschland)</string>
     <string name="storeZipLabel">PLZ der Filale</string>
@@ -30,6 +31,7 @@
     <string name="muellerAtTrackingUrl">https://mfoto.mueller-drogerie.at/auftragsauskunft.html</string>
     <string name="muellerDeTrackingUrl">https://m.foto.mueller.de/auftragsauskunft.html</string>
     <string name="rossmannDeTrackingUrl">http://www.rossmann-fotowelt.de/auftragstasche-foto-station/</string>
+    <string name="ceweTrackingUrl">https://m.fotoservice.ringfoto.de/auftragsauskunft.html</string>
     <string name="openStoreTrackingButtonText">%s Auftragsverfolgung öffnen</string>
     <string name="bipaAtUiName">BIPA (Österreich)</string>
     <string name="bipaAtTrackingUrl">https://fotoshop.bipa.at/auftragsauskunft.html</string>

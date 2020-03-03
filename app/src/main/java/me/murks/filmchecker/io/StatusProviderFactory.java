@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import me.murks.filmchecker.model.BipaAtStoreModel;
+import me.murks.filmchecker.model.CeweStoreModel;
 import me.murks.filmchecker.model.DmAtStoreModel;
 import me.murks.filmchecker.model.DmDeStoreModel;
 import me.murks.filmchecker.model.MuellerAtStoreModel;
@@ -28,6 +29,7 @@ public class StatusProviderFactory {
         statusProvider.put(MuellerAtStoreModel.StoreId, new MuellerAtStatusProvider());
         statusProvider.put(MuellerDeStoreModel.StoreId, new MuellerDeStatusProvider());
         statusProvider.put(BipaAtStoreModel.StoreId, new BipaAtStatusProvider());
+        statusProvider.put(CeweStoreModel.StoreId,new CeweStatusProvider());
     }
 
     /**
