@@ -14,6 +14,7 @@
     <string name="storeZipLabel">Store\'s zip code</string>
     <string name="dmAtUiName">DM (Austria)</string>
     <string name="aboutMenu">About</string>
+    <string name="ceweUiName">Cewe</string>
     <string name="muellerAtUiName">Müller (Austria)</string>
     <string name="customerNumberLabel">Customer number</string>
     <string name="errorMessageTitle">Error</string>
@@ -31,6 +32,7 @@
     <string name="muellerAtTrackingUrl">https://mfoto.mueller-drogerie.at/auftragsauskunft.html</string>
     <string name="muellerDeTrackingUrl">https://m.foto.mueller.de/auftragsauskunft.html</string>
     <string name="rossmannDeTrackingUrl">http://www.rossmann-fotowelt.de/auftragstasche-foto-station/</string>
+    <string name="ceweTrackingUrl">https://m.fotoservice.ringfoto.de/auftragsauskunft.html</string>
     <string name="openStoreTrackingButtonText">%s\'s tracking page</string>
     <string name="bipaAtUiName">BIPA (Austria)</string>
     <string name="bipaAtTrackingUrl">https://fotoshop.bipa.at/auftragsauskunft.html</string>
